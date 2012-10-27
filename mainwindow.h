@@ -20,6 +20,7 @@ public:
 private slots:
     void slotHandleInput();
     void slotUnderline(bool);
+    void slotWindowLoaded();
     
 private:
     Ui::MainWindow *ui;
@@ -29,6 +30,7 @@ private:
     void setupEvents();
     bool judgeInput(QString string);
     void updateStatus(bool correct);
+    void openFileDialog();
 };
 
 #endif // MAINWINDOW_H

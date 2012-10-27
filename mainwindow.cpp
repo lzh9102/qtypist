@@ -1,7 +1,11 @@
 #include "mainwindow.h"
+#include <QSettings>
+#include <QFile>
+#include <QTextStream>
+#include <QTimer>
 #include "ui_mainwindow.h"
 #include "queuedisplay.h"
-#include <QSettings>
+#include "filedialog.h"
 
 #define DEFAULT_FONT_SIZE 25
 
@@ -15,9 +19,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setupEvents();
     loadSettings();
-
-    m_display->push("hello");
-    m_display->push("world");
 }
 
 MainWindow::~MainWindow()
@@ -40,6 +41,17 @@ void MainWindow::slotHandleInput()
         }
         updateStatus(correct);
     }
+}
+
+void MainWindow::slotUnderline(bool checked)
+{
+    m_display->setUnderlineFront(checked);
+}
+
+
+void MainWindow::slotWindowLoaded()
+{
+    openFileDialog();
 }
 
 void MainWindow::loadSettings()
@@ -74,6 +86,9 @@ void MainWindow::setupEvents()
             , this, SLOT(close()));
     connect(ui->actionUnderline, SIGNAL(triggered(bool))
             , this, SLOT(slotUnderline(bool)));
+
+    // call slotWindowReady() when program enters the event loop
+    QTimer::singleShot(0, this, SLOT(slotWindowLoaded()));
 }
 
 bool MainWindow::judgeInput(QString string)
@@ -103,7 +118,20 @@ void MainWindow::updateStatus(bool correct)
     ui->txtInput->setPalette(palette);
 }
 
-void MainWindow::slotUnderline(bool checked)
+void MainWindow::openFileDialog()
 {
-    m_display->setUnderlineFront(checked);
+    FileDialog dialog(this);
+    if (dialog.exec() == QDialog::Accepted) {
+        // load file content
+        QFile file(dialog.selectedFile());
+        if (file.open(QIODevice::ReadOnly)) {
+            QTextStream instr(&file);
+            while (!instr.atEnd())
+            {
+                QString line = instr.readLine().trimmed();
+                m_display->push(line);
+            }
+        }
+    }
 }
+

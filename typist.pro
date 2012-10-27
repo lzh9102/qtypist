@@ -15,13 +15,18 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     queuedisplay.cpp \
-    stringmatching.cpp
+    stringmatching.cpp \
+    filedialog.cpp \
+    paths.cpp
 
 HEADERS  += mainwindow.h \
     queuedisplay.h \
-    stringmatching.h
+    stringmatching.h \
+    filedialog.h \
+    paths.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    filedialog.ui
 
 RESOURCES += \
     resource.qrc
