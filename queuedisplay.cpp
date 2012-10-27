@@ -113,9 +113,6 @@ void QueueDisplay::paintEvent(QPaintEvent *)
 
         painter.drawText(region, m_strings[i]
                          , QTextOption(Qt::AlignLeft | Qt::AlignTop));
-        qDebug() << "QueueDisplay::paintEvent(): "
-                 << "text: " << m_strings[i]
-                 << "y: " << font_y << ", h: " << font_height;
     }
 
     // DEBUG: draw border

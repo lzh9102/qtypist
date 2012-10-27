@@ -1,6 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "queuedisplay.h"
+#include <QSettings>
+
+#define DEFAULT_FONT_SIZE 25
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -9,18 +12,21 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->displayLayout->addWidget(m_display);
-    connect(ui->txtInput, SIGNAL(returnPressed())
-            , this, SLOT(slotHandleInput()));
+
+    setupEvents();
+    loadSettings();
+
+    m_display->push("hello");
+    m_display->push("world");
 }
 
 MainWindow::~MainWindow()
 {
+    saveSettings();
     delete ui;
 }
 
-/* Handle Return key in the input box
- * Clear the input box and pop the queue
- */
+// Handle Return key in the input box
 void MainWindow::slotHandleInput()
 {
     QString string = ui->txtInput->text().trimmed();
@@ -34,6 +40,40 @@ void MainWindow::slotHandleInput()
         }
         updateStatus(correct);
     }
+}
+
+void MainWindow::loadSettings()
+{
+    QSettings settings;
+
+    const int font_size = settings.value("fontsize", DEFAULT_FONT_SIZE).toInt();
+    QFont font = ui->txtInput->font();
+    font.setPointSize(font_size);
+    ui->txtInput->setFont(font);
+    m_display->setFontSize(font_size);
+
+    const bool underline = settings.value("underline", true).toBool();
+    ui->actionUnderline->setChecked(underline);
+    slotUnderline(underline); // guarantee that m_display is updated
+
+    restoreGeometry(settings.value("window_geometry").toByteArray());
+}
+
+void MainWindow::saveSettings()
+{
+    QSettings settings;
+    settings.setValue("underline", ui->actionUnderline->isChecked());
+    settings.setValue("window_geometry", saveGeometry());
+}
+
+void MainWindow::setupEvents()
+{
+    connect(ui->txtInput, SIGNAL(returnPressed())
+            , this, SLOT(slotHandleInput()));
+    connect(ui->actionExit, SIGNAL(triggered())
+            , this, SLOT(close()));
+    connect(ui->actionUnderline, SIGNAL(triggered(bool))
+            , this, SLOT(slotUnderline(bool)));
 }
 
 bool MainWindow::judgeInput(QString string)
@@ -61,4 +101,9 @@ void MainWindow::updateStatus(bool correct)
     QPalette palette = ui->txtInput->palette();
     palette.setColor(QPalette::Text, text_color);
     ui->txtInput->setPalette(palette);
+}
+
+void MainWindow::slotUnderline(bool checked)
+{
+    m_display->setUnderlineFront(checked);
 }

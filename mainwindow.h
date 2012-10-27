@@ -19,10 +19,14 @@ public:
 
 private slots:
     void slotHandleInput();
+    void slotUnderline(bool);
     
 private:
     Ui::MainWindow *ui;
     QueueDisplay *m_display;
+    void loadSettings();
+    void saveSettings();
+    void setupEvents();
     bool judgeInput(QString string);
     void updateStatus(bool correct);
 };
