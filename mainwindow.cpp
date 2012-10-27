@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include <QTimer>
 #include <QElapsedTimer>
+#include <QDebug>
 #include "ui_mainwindow.h"
 #include "queuedisplay.h"
 #include "chartdisplay.h"
@@ -201,5 +202,5 @@ void MainWindow::refillQueue()
 
 void MainWindow::updateChart(int count, int ms)
 {
-    m_chart->pushData((double)count * 1000 / (ms+1));
+    m_chart->pushData((double)count * 1000 * 60 / (ms+1));
 }

@@ -85,9 +85,9 @@ void ChartDisplay::paintEvent(QPaintEvent*)
     painter.drawLine(left, bottom, right, bottom);
     painter.drawLine(right, top, right, bottom);
 
-    painter.drawText(0, top + 10, QString::number(m_max + 1));
-    painter.drawText(0, h/2+top, QString::number((double)(m_max + m_min + 1) / 2));
-    painter.drawText(0, bottom, QString::number(m_min));
+    painter.drawText(0, top + 10, QString::number(m_max + 1, 'g', 3));
+    painter.drawText(0, h/2+top, QString::number((m_max + m_min + 1) / 2, 'g', 3));
+    painter.drawText(0, bottom, QString::number(m_min, 'g', 3));
 
     // draw cursor lines
     if (QRect(left, top, w, h).contains(m_mousepos)) {
@@ -102,7 +102,7 @@ void ChartDisplay::paintEvent(QPaintEvent*)
             painter.setPen(pen);
             painter.drawLine(line_x, top, line_x, bottom);
             painter.drawLine(left, line_y, right, line_y);
-            painter.drawText(left + 3, bottom - 3, tr("Cycle: %1, Price: %2")
+            painter.drawText(left + 3, bottom - 3, tr("Number: %1, Speed: %2")
                              .arg(m_cycle - (index_max - index))
                              .arg(m_data[index]));
         }
