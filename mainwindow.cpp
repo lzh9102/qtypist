@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->displayLayout->addWidget(m_display);
+    ui->mainToolBar->setVisible(false);
 
     setupEvents();
     loadSettings();
@@ -46,11 +47,18 @@ void MainWindow::slotHandleInput()
     }
 }
 
+void MainWindow::slotTextEdited()
+{
+    if (!m_display->isEmpty() && ui->actionAutoCommit->isChecked()) {
+        if (judgeInput(ui->txtInput->text()))
+            slotHandleInput();
+    }
+}
+
 void MainWindow::slotUnderline(bool checked)
 {
     m_display->setUnderlineFront(checked);
 }
-
 
 void MainWindow::slotWindowLoaded()
 {
@@ -76,6 +84,8 @@ void MainWindow::loadSettings()
     ui->actionUnderline->setChecked(underline);
     slotUnderline(underline); // guarantee that m_display is updated
 
+    ui->actionAutoCommit->setChecked(settings.value("autocommit", false).toBool());
+
     restoreGeometry(settings.value("window_geometry").toByteArray());
 }
 
@@ -83,6 +93,7 @@ void MainWindow::saveSettings()
 {
     QSettings settings;
     settings.setValue("underline", ui->actionUnderline->isChecked());
+    settings.setValue("autocommit", ui->actionAutoCommit->isChecked());
     settings.setValue("window_geometry", saveGeometry());
 }
 
@@ -96,6 +107,8 @@ void MainWindow::setupEvents()
             , this, SLOT(slotUnderline(bool)));
     connect(ui->actionOpen, SIGNAL(triggered())
             , this, SLOT(slotOpenFile()));
+    connect(ui->txtInput, SIGNAL(textChanged(QString))
+            , this, SLOT(slotTextEdited()));
 
     // call slotWindowReady() when program enters the event loop
     QTimer::singleShot(0, this, SLOT(slotWindowLoaded()));

@@ -83,7 +83,15 @@
     </property>
     <addaction name="actionUnderline"/>
    </widget>
+   <widget class="QMenu" name="menuTyping">
+    <property name="title">
+     <string>&amp;Typing</string>
+    </property>
+    <addaction name="actionAutoCommit"/>
+    <addaction name="actionSkip"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuTyping"/>
    <addaction name="menuView"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -121,6 +129,19 @@
   <action name="actionOpen">
    <property name="text">
     <string>&amp;Open</string>
+   </property>
+  </action>
+  <action name="actionAutoCommit">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Auto Commit</string>
+   </property>
+  </action>
+  <action name="actionSkip">
+   <property name="text">
+    <string>&amp;Skip</string>
    </property>
   </action>
  </widget>

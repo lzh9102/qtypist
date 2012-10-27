@@ -20,6 +20,7 @@ public:
 
 private slots:
     void slotHandleInput();
+    void slotTextEdited();
     void slotUnderline(bool);
     void slotWindowLoaded();
     void slotOpenFile();
