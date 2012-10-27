@@ -44,5 +44,5 @@ QString DataSource::next()
     if (m_list.isEmpty())
         return "";
     else
-        return m_list[rand() % m_list.size()];
+        return m_list[rand() % m_list.size()].trimmed();
 }
