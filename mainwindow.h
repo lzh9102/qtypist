@@ -23,6 +23,7 @@ private slots:
     void slotTextEdited();
     void slotSkip();
     void slotUnderline(bool);
+    void slotHideParen(bool);
     void slotWindowLoaded();
     void slotOpenFile();
 

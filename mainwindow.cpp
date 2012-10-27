@@ -67,6 +67,11 @@ void MainWindow::slotUnderline(bool checked)
     m_display->setUnderlineFront(checked);
 }
 
+void MainWindow::slotHideParen(bool checked)
+{
+    m_display->setHideParen(checked);
+}
+
 void MainWindow::slotWindowLoaded()
 {
     openFileDialog();
@@ -93,6 +98,10 @@ void MainWindow::loadSettings()
 
     ui->actionAutoCommit->setChecked(settings.value("autocommit", true).toBool());
 
+    const bool hideparen = settings.value("hideparen", false).toBool();
+    ui->actionHideParen->setChecked(hideparen);
+    slotHideParen(hideparen);
+
     restoreGeometry(settings.value("window_geometry").toByteArray());
 }
 
@@ -101,6 +110,7 @@ void MainWindow::saveSettings()
     QSettings settings;
     settings.setValue("underline", ui->actionUnderline->isChecked());
     settings.setValue("autocommit", ui->actionAutoCommit->isChecked());
+    settings.setValue("hideparen", ui->actionHideParen->isChecked());
     settings.setValue("window_geometry", saveGeometry());
 }
 
@@ -118,6 +128,8 @@ void MainWindow::setupEvents()
             , this, SLOT(slotTextEdited()));
     connect(ui->actionSkip, SIGNAL(triggered())
             , this, SLOT(slotSkip()));
+    connect(ui->actionHideParen, SIGNAL(triggered(bool))
+            , this, SLOT(slotHideParen(bool)));
 
     // call slotWindowReady() when program enters the event loop
     QTimer::singleShot(0, this, SLOT(slotWindowLoaded()));
@@ -125,7 +137,10 @@ void MainWindow::setupEvents()
 
 bool MainWindow::judgeInput(QString string)
 {
-    return string == m_display->front();
+    // remove text quoted by parenthesis
+    QString expect = m_display->front();
+    expect.remove(QRegExp("\\([^)]*\\)"));
+    return string == expect.trimmed();
 }
 
 void MainWindow::updateStatus(bool correct)

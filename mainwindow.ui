@@ -83,6 +83,7 @@
     </property>
     <addaction name="actionAutoCommit"/>
     <addaction name="actionUnderline"/>
+    <addaction name="actionHideParen"/>
    </widget>
    <widget class="QMenu" name="menuTyping">
     <property name="title">
@@ -158,6 +159,14 @@
    </property>
    <property name="text">
     <string>&amp;Skip</string>
+   </property>
+  </action>
+  <action name="actionHideParen">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Hide &amp;Parenthesized</string>
    </property>
   </action>
  </widget>

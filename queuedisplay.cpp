@@ -10,7 +10,8 @@ QueueDisplay::QueueDisplay(QWidget *parent) :
     QWidget(parent),
     m_displayCount(DEFAULT_DISPLAY_COUNT),
     m_direction(BOTTOM_TO_TOP),
-    m_underline(false)
+    m_underline(false),
+    m_hideParen(false)
 {
 }
 
@@ -93,11 +94,18 @@ void QueueDisplay::setFontSize(int p)
     repaint();
 }
 
+void QueueDisplay::setHideParen(bool b)
+{
+    m_hideParen = b;
+    repaint();
+}
+
 void QueueDisplay::paintEvent(QPaintEvent *)
 {
     const int count = std::min(m_strings.size(), m_displayCount);
     QPainter painter(this);
     const int font_height = painter.fontMetrics().height();
+    QRegExp paren("\\([^)]*\\)");
 
     for (int i=0; i<count; i++) {
         const int font_y = (m_direction == BOTTOM_TO_TOP)
@@ -124,7 +132,11 @@ void QueueDisplay::paintEvent(QPaintEvent *)
             painter.setFont(font);
         }
 
-        painter.drawText(region, m_strings[i]
+        QString string = m_strings[i];
+        if (m_hideParen)
+            string.remove(paren);
+
+        painter.drawText(region, string
                          , QTextOption(Qt::AlignLeft | Qt::AlignTop));
     }
 
