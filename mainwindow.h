@@ -39,6 +39,7 @@ private:
     void loadSettings();
     void saveSettings();
     void setupEvents();
+    void setupToolbar();
     bool judgeInput(QString string);
     void updateStatus(bool correct);
     void openFileDialog();

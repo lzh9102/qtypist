@@ -25,8 +25,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->displayLayout->addWidget(m_display);
     ui->chartLayout->addWidget(m_chart);
     ui->chartLayout->setSizeConstraint(QLayout::SetMaximumSize);
-    ui->mainToolBar->setVisible(false);
 
+    setupToolbar();
     setupEvents();
     loadSettings();
     updateChart(0, 0);
@@ -113,6 +113,7 @@ void MainWindow::loadSettings()
     slotHideParen(hideparen);
 
     restoreGeometry(settings.value("window_geometry").toByteArray());
+    restoreState(settings.value("window_state").toByteArray());
 }
 
 void MainWindow::saveSettings()
@@ -122,6 +123,7 @@ void MainWindow::saveSettings()
     settings.setValue("autocommit", ui->actionAutoCommit->isChecked());
     settings.setValue("hideparen", ui->actionHideParen->isChecked());
     settings.setValue("window_geometry", saveGeometry());
+    settings.setValue("window_state", saveState());
 }
 
 void MainWindow::setupEvents()
@@ -143,6 +145,13 @@ void MainWindow::setupEvents()
 
     // call slotWindowReady() when program enters the event loop
     QTimer::singleShot(0, this, SLOT(slotWindowLoaded()));
+}
+
+void MainWindow::setupToolbar()
+{
+    ui->toolBar->addAction(ui->actionOpen);
+    ui->toolBar->addAction(ui->actionSkip);
+    ui->toolBar->addAction(ui->actionAutoCommit);
 }
 
 bool MainWindow::judgeInput(QString string)
