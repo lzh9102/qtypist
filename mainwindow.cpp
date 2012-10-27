@@ -55,6 +55,13 @@ void MainWindow::slotTextEdited()
     }
 }
 
+void MainWindow::slotSkip()
+{
+    if (!m_display->isEmpty()) {
+        m_display->pop();
+    }
+}
+
 void MainWindow::slotUnderline(bool checked)
 {
     m_display->setUnderlineFront(checked);
@@ -109,6 +116,8 @@ void MainWindow::setupEvents()
             , this, SLOT(slotOpenFile()));
     connect(ui->txtInput, SIGNAL(textChanged(QString))
             , this, SLOT(slotTextEdited()));
+    connect(ui->actionSkip, SIGNAL(triggered())
+            , this, SLOT(slotSkip()));
 
     // call slotWindowReady() when program enters the event loop
     QTimer::singleShot(0, this, SLOT(slotWindowLoaded()));

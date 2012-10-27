@@ -21,6 +21,7 @@ public:
 private slots:
     void slotHandleInput();
     void slotTextEdited();
+    void slotSkip();
     void slotUnderline(bool);
     void slotWindowLoaded();
     void slotOpenFile();
