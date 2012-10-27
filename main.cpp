@@ -11,9 +11,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    srand(time(0));
-
-    MainWindow w;
+    app.setOrganizationName("qtypist");
 
     Paths::setAppPath(app.applicationDirPath());
 
@@ -26,6 +24,9 @@ int main(int argc, char *argv[])
     translator.load(translation_basename + locale);
     app.installTranslator(&translator);
 
+    srand(time(0));
+
+    MainWindow w;
     w.show();
     return app.exec();
 }
