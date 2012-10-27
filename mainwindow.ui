@@ -69,7 +69,11 @@
          <layout class="QVBoxLayout" name="displayLayout"/>
         </item>
         <item>
-         <widget class="QLineEdit" name="txtInput"/>
+         <widget class="QLineEdit" name="txtInput">
+          <property name="maxLength">
+           <number>255</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
