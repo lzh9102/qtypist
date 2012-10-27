@@ -2,8 +2,10 @@
 #include <QSettings>
 #include <QMessageBox>
 #include <QTimer>
+#include <QElapsedTimer>
 #include "ui_mainwindow.h"
 #include "queuedisplay.h"
+#include "chartdisplay.h"
 #include "filedialog.h"
 #include "datasource.h"
 
@@ -14,10 +16,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     m_display(new QueueDisplay(this)),
+    m_chart(new ChartDisplay(this)),
     m_dataSource(new DataSource(this))
 {
     ui->setupUi(this);
     ui->displayLayout->addWidget(m_display);
+    ui->chartLayout->addWidget(m_chart);
+    ui->chartLayout->setSizeConstraint(QLayout::SetMaximumSize);
     ui->mainToolBar->setVisible(false);
 
     setupEvents();
@@ -39,6 +44,8 @@ void MainWindow::slotHandleInput()
         if (correct) { // correct input
             ui->txtInput->clear();
             m_display->pop();
+            updateChart(string.size(), m_elapsedTimer.elapsed());
+            m_elapsedTimer.restart();
         } else { // incorrect input
             ui->txtInput->selectAll();
         }
@@ -140,7 +147,7 @@ bool MainWindow::judgeInput(QString string)
     // remove text quoted by parenthesis
     QString expect = m_display->front();
     expect.remove(QRegExp("\\([^)]*\\)"));
-    return string == expect.trimmed();
+    return string.trimmed() == expect.trimmed();
 }
 
 void MainWindow::updateStatus(bool correct)
@@ -174,11 +181,12 @@ void MainWindow::openFileDialog()
         if (!m_dataSource->addFile(dialog.selectedFile())) {
             QMessageBox::critical(this, tr("Error")
                                   , tr("Failed to read file."));
-        } else {
+        } else { // file opened successfully
             m_display->clear();
             refillQueue();
             setWindowTitle(QString("%1 - %2").arg(dialog.selectedName())
                            .arg(tr("Typing Drill")));
+            m_elapsedTimer.restart();
         }
     }
 }
@@ -189,4 +197,9 @@ void MainWindow::refillQueue()
         while (m_display->count() < MIN_LINE_COUNT)
             m_display->push(m_dataSource->next());
     }
+}
+
+void MainWindow::updateChart(int count, int ms)
+{
+    m_chart->pushData((double)count * 1000 / (ms+1));
 }

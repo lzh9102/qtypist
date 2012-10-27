@@ -18,14 +18,16 @@ SOURCES += main.cpp\
     stringmatching.cpp \
     filedialog.cpp \
     paths.cpp \
-    datasource.cpp
+    datasource.cpp \
+    chartdisplay.cpp
 
 HEADERS  += mainwindow.h \
     queuedisplay.h \
     stringmatching.h \
     filedialog.h \
     paths.h \
-    datasource.h
+    datasource.h \
+    chartdisplay.h
 
 FORMS    += mainwindow.ui \
     filedialog.ui

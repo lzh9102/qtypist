@@ -2,12 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QElapsedTimer>
 
 namespace Ui {
 class MainWindow;
 }
 
 class QueueDisplay;
+class ChartDisplay;
 class DataSource;
 
 class MainWindow : public QMainWindow
@@ -30,7 +32,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QueueDisplay *m_display;
+    ChartDisplay *m_chart;
     DataSource *m_dataSource;
+    QElapsedTimer m_elapsedTimer;
     void loadSettings();
     void saveSettings();
     void setupEvents();
@@ -38,6 +42,7 @@ private:
     void updateStatus(bool correct);
     void openFileDialog();
     void refillQueue();
+    void updateChart(int count, int ms);
 };
 
 #endif // MAINWINDOW_H
