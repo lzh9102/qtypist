@@ -34,3 +34,6 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += \
     resource.qrc
+
+TRANSLATIONS += \
+    translations/qtypist_zh_TW.ts

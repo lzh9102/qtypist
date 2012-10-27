@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     QString locale = QLocale::system().name();
     QTranslator translator;
     QString translation_basename =
-            QDir(Paths::translationPath()).absoluteFilePath("typist_");
+            QDir(Paths::translationPath()).absoluteFilePath("qtypist_");
     qDebug() << "Translation file: " + translation_basename + locale + ".qm";
     translator.load(translation_basename + locale);
     app.installTranslator(&translator);
