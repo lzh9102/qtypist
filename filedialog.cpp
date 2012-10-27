@@ -23,6 +23,7 @@ FileDialog::FileDialog(QWidget *parent) :
     }
 
     ui->listFiles->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->listFiles->setCurrentRow(0); // select the first item by default
 }
 
 FileDialog::~FileDialog()

@@ -15,6 +15,9 @@ public:
     explicit FileDialog(QWidget *parent = 0);
     ~FileDialog();
 
+    /**
+     * @brief Get the full path of the selected file.
+     */
     QString selectedFile() const;
     
 private:
