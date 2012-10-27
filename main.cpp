@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QDebug>
 #include <cstdlib>
+#include <ctime>
 #include "mainwindow.h"
 #include "paths.h"
 
