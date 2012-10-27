@@ -22,6 +22,7 @@ private slots:
     void slotHandleInput();
     void slotUnderline(bool);
     void slotWindowLoaded();
+    void slotOpenFile();
 
 private:
     Ui::MainWindow *ui;

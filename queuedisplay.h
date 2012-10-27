@@ -20,6 +20,7 @@ public slots:
     void setDisplayCount(int n);
     void push(QString s);
     void pop();
+    void clear();
     void setDirection(Direction dir);
     void setUnderlineFront(bool b);
     void setFontSize(int p);

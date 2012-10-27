@@ -74,6 +74,7 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="actionOpen"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuView">
@@ -110,6 +111,16 @@
    </property>
    <property name="text">
     <string>&amp;Underline</string>
+   </property>
+  </action>
+  <action name="action_Skip">
+   <property name="text">
+    <string>&amp;Skip</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>&amp;Open</string>
    </property>
   </action>
  </widget>

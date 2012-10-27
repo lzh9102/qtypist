@@ -57,6 +57,11 @@ void MainWindow::slotWindowLoaded()
     openFileDialog();
 }
 
+void MainWindow::slotOpenFile()
+{
+    openFileDialog();
+}
+
 void MainWindow::loadSettings()
 {
     QSettings settings;
@@ -89,6 +94,8 @@ void MainWindow::setupEvents()
             , this, SLOT(close()));
     connect(ui->actionUnderline, SIGNAL(triggered(bool))
             , this, SLOT(slotUnderline(bool)));
+    connect(ui->actionOpen, SIGNAL(triggered())
+            , this, SLOT(slotOpenFile()));
 
     // call slotWindowReady() when program enters the event loop
     QTimer::singleShot(0, this, SLOT(slotWindowLoaded()));
@@ -128,8 +135,10 @@ void MainWindow::openFileDialog()
         if (!m_dataSource->addFile(dialog.selectedFile())) {
             QMessageBox::critical(this, tr("Error")
                                   , tr("Failed to read file."));
+        } else {
+            m_display->clear();
+            reloadQueue();
         }
-        reloadQueue();
     }
 }
 

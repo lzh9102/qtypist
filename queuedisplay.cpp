@@ -38,6 +38,12 @@ void QueueDisplay::pop()
         qWarning("QueueDisplay::pop(): the queue is empty");
 }
 
+void QueueDisplay::clear()
+{
+    m_strings.clear();
+    repaint();
+}
+
 QString QueueDisplay::front() const
 {
     if (!m_strings.isEmpty())
