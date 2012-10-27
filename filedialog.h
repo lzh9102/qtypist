@@ -19,7 +19,10 @@ public:
      * @brief Get the full path of the selected file.
      */
     QString selectedFile() const;
-    
+
+private slots:
+    void slotAccepted();
+
 private:
     Ui::FileDialog *ui;
 };
