@@ -43,13 +43,15 @@ FileDialog::~FileDialog()
 
 QString FileDialog::selectedFile() const
 {
-    QString filename;
+    return Paths::dataFileName("lists/" + selectedName() + ".txt");
+}
+
+QString FileDialog::selectedName() const
+{
     if (ui->listFiles->selectedItems().isEmpty())
         return "";
     else
-        filename = ui->listFiles->selectedItems().at(0)->text().append(".txt");
-    filename = Paths::dataFileName("lists/" + filename);
-    return filename;
+        return ui->listFiles->selectedItems().at(0)->text();
 }
 
 void FileDialog::slotAccepted()

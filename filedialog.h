@@ -19,6 +19,7 @@ public:
      * @brief Get the full path of the selected file.
      */
     QString selectedFile() const;
+    QString selectedName() const;
 
 private slots:
     void slotAccepted();

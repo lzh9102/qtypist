@@ -177,6 +177,8 @@ void MainWindow::openFileDialog()
         } else {
             m_display->clear();
             refillQueue();
+            setWindowTitle(QString("%1 - %2").arg(dialog.selectedName())
+                           .arg(tr("Typing Drill")));
         }
     }
 }
