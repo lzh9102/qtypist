@@ -97,7 +97,6 @@ void QueueDisplay::paintEvent(QPaintEvent *)
 {
     const int count = std::min(m_strings.size(), m_displayCount);
     QPainter painter(this);
-    QPen pen = painter.pen();
     const int font_height = painter.fontMetrics().height();
 
     for (int i=0; i<count; i++) {
@@ -107,18 +106,21 @@ void QueueDisplay::paintEvent(QPaintEvent *)
         const double opacity = (1.0 - i * ((double)font_height / height()));
         QRect region(0, font_y, width(), font_height);
 
-        if (region.top() < 0 || region.bottom() >= height())
+        if (region.bottom() < 0 || region.top() >= height())
             break; // out of border
 
         painter.setOpacity(opacity);
 
-        if (m_underline && i == 0) { // underline the first item in the queue
+        if (i == 0) {
             QFont font = painter.font();
-            font.setUnderline(true);
+            if (m_underline)
+                font.setUnderline(true);
+            font.setBold(true);
             painter.setFont(font);
-        } else if (painter.font().underline()) { // cancel underline
+        } else {
             QFont font = painter.font();
             font.setUnderline(false);
+            font.setBold(false);
             painter.setFont(font);
         }
 

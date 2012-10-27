@@ -34,7 +34,7 @@ private:
     bool judgeInput(QString string);
     void updateStatus(bool correct);
     void openFileDialog();
-    void reloadQueue();
+    void refillQueue();
 };
 
 #endif // MAINWINDOW_H

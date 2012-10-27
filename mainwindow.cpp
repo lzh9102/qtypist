@@ -8,7 +8,7 @@
 #include "datasource.h"
 
 #define DEFAULT_FONT_SIZE 25
-#define MIN_LINE_COUNT 10
+#define MIN_LINE_COUNT 50
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -42,7 +42,7 @@ void MainWindow::slotHandleInput()
             ui->txtInput->selectAll();
         }
         updateStatus(correct);
-        reloadQueue();
+        refillQueue();
     }
 }
 
@@ -137,12 +137,12 @@ void MainWindow::openFileDialog()
                                   , tr("Failed to read file."));
         } else {
             m_display->clear();
-            reloadQueue();
+            refillQueue();
         }
     }
 }
 
-void MainWindow::reloadQueue()
+void MainWindow::refillQueue()
 {
     if (!m_dataSource->isEmpty()) {
         while (m_display->count() < MIN_LINE_COUNT)
