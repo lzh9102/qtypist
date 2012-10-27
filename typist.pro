@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    queuedisplay.cpp
+    queuedisplay.cpp \
+    stringmatching.cpp
 
 HEADERS  += mainwindow.h \
-    queuedisplay.h
+    queuedisplay.h \
+    stringmatching.h
 
 FORMS    += mainwindow.ui
 
