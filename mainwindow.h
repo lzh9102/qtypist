@@ -35,6 +35,7 @@ private:
     ChartDisplay *m_chart;
     DataSource *m_dataSource;
     QElapsedTimer m_elapsedTimer;
+    double m_maxSpeed;
     void loadSettings();
     void saveSettings();
     void setupEvents();

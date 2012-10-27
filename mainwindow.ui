@@ -19,6 +19,13 @@
      <layout class="QHBoxLayout" name="chartLayout"/>
     </item>
     <item>
+     <widget class="QLabel" name="lblMaxSpeed">
+      <property name="text">
+       <string notr="true">lblMaxSpeed</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">

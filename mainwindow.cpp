@@ -18,7 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     m_display(new QueueDisplay(this)),
     m_chart(new ChartDisplay(this)),
-    m_dataSource(new DataSource(this))
+    m_dataSource(new DataSource(this)),
+    m_maxSpeed(0)
 {
     ui->setupUi(this);
     ui->displayLayout->addWidget(m_display);
@@ -28,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setupEvents();
     loadSettings();
+    updateChart(0, 0);
 }
 
 MainWindow::~MainWindow()
@@ -202,5 +204,9 @@ void MainWindow::refillQueue()
 
 void MainWindow::updateChart(int count, int ms)
 {
-    m_chart->pushData((double)count * 1000 * 60 / (ms+1));
+    double speed = (double)count * 1000 * 60 / (ms + 1);
+    m_chart->pushData(speed);
+    if (speed > m_maxSpeed)
+        m_maxSpeed = speed;
+    ui->lblMaxSpeed->setText(tr("Max Speed: %1").arg(m_maxSpeed));
 }
