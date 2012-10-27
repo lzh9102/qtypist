@@ -92,6 +92,16 @@ void MainWindow::slotOpenFile()
     openFileDialog();
 }
 
+void MainWindow::slotAbout()
+{
+    QMessageBox::information(
+                this,
+                tr("About this program"),
+                "qtypist (C) 2012 Timothy Lin\n\n"
+                + tr("This program is free software; you can redistribute it and/or modify it "
+                     "under the terms of the GNU General Public License version 2 or 3."));
+}
+
 void MainWindow::loadSettings()
 {
     QSettings settings;
@@ -142,6 +152,8 @@ void MainWindow::setupEvents()
             , this, SLOT(slotSkip()));
     connect(ui->actionHideParen, SIGNAL(triggered(bool))
             , this, SLOT(slotHideParen(bool)));
+    connect(ui->actionAbout, SIGNAL(triggered())
+            , this, SLOT(slotAbout()));
 
     // call slotWindowReady() when program enters the event loop
     QTimer::singleShot(0, this, SLOT(slotWindowLoaded()));

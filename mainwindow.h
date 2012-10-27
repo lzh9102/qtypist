@@ -28,6 +28,7 @@ private slots:
     void slotHideParen(bool);
     void slotWindowLoaded();
     void slotOpenFile();
+    void slotAbout();
 
 private:
     Ui::MainWindow *ui;

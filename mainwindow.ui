@@ -111,9 +111,16 @@
     </property>
     <addaction name="actionSkip"/>
    </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>&amp;About</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTyping"/>
    <addaction name="menuSettings"/>
+   <addaction name="menuAbout"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
    <attribute name="toolBarArea">
@@ -187,6 +194,11 @@
    </property>
    <property name="text">
     <string>Hide &amp;Parenthesized</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About This Program</string>
    </property>
   </action>
  </widget>
