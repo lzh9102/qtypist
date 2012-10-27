@@ -21,7 +21,8 @@ bool DataSource::addFile(const QString &filename)
         while (!instr.atEnd())
         {
             QString line = instr.readLine().trimmed();
-            m_list.push_back(line);
+            if (!line.isEmpty())
+                m_list.push_back(line);
         }
         return true;
     } else {
