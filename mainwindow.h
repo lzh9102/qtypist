@@ -8,6 +8,7 @@ class MainWindow;
 }
 
 class QueueDisplay;
+class DataSource;
 
 class MainWindow : public QMainWindow
 {
@@ -21,16 +22,18 @@ private slots:
     void slotHandleInput();
     void slotUnderline(bool);
     void slotWindowLoaded();
-    
+
 private:
     Ui::MainWindow *ui;
     QueueDisplay *m_display;
+    DataSource *m_dataSource;
     void loadSettings();
     void saveSettings();
     void setupEvents();
     bool judgeInput(QString string);
     void updateStatus(bool correct);
     void openFileDialog();
+    void reloadQueue();
 };
 
 #endif // MAINWINDOW_H

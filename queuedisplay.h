@@ -12,6 +12,7 @@ public:
 
     QString front() const;
     bool isEmpty() const;
+    int count() const;
     
 signals:
     

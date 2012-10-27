@@ -3,12 +3,16 @@
 #include <QLocale>
 #include <QDir>
 #include <QDebug>
+#include <cstdlib>
 #include "mainwindow.h"
 #include "paths.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    srand(time(0));
+
     MainWindow w;
 
     Paths::setAppPath(app.applicationDirPath());

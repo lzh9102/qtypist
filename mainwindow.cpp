@@ -1,18 +1,20 @@
 #include "mainwindow.h"
 #include <QSettings>
-#include <QFile>
-#include <QTextStream>
+#include <QMessageBox>
 #include <QTimer>
 #include "ui_mainwindow.h"
 #include "queuedisplay.h"
 #include "filedialog.h"
+#include "datasource.h"
 
 #define DEFAULT_FONT_SIZE 25
+#define MIN_LINE_COUNT 10
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    m_display(new QueueDisplay(this))
+    m_display(new QueueDisplay(this)),
+    m_dataSource(new DataSource(this))
 {
     ui->setupUi(this);
     ui->displayLayout->addWidget(m_display);
@@ -40,6 +42,7 @@ void MainWindow::slotHandleInput()
             ui->txtInput->selectAll();
         }
         updateStatus(correct);
+        reloadQueue();
     }
 }
 
@@ -122,16 +125,18 @@ void MainWindow::openFileDialog()
 {
     FileDialog dialog(this);
     if (dialog.exec() == QDialog::Accepted) {
-        // load file content
-        QFile file(dialog.selectedFile());
-        if (file.open(QIODevice::ReadOnly)) {
-            QTextStream instr(&file);
-            while (!instr.atEnd())
-            {
-                QString line = instr.readLine().trimmed();
-                m_display->push(line);
-            }
+        if (!m_dataSource->addFile(dialog.selectedFile())) {
+            QMessageBox::critical(this, tr("Error")
+                                  , tr("Failed to read file."));
         }
+        reloadQueue();
     }
 }
 
+void MainWindow::reloadQueue()
+{
+    if (!m_dataSource->isEmpty()) {
+        while (m_display->count() < MIN_LINE_COUNT)
+            m_display->push(m_dataSource->next());
+    }
+}

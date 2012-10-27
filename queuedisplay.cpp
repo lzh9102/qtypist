@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <algorithm>
 
-#define DEFAULT_DISPLAY_COUNT 20
+#define DEFAULT_DISPLAY_COUNT 50
 
 QueueDisplay::QueueDisplay(QWidget *parent) :
     QWidget(parent),
@@ -51,6 +51,11 @@ QString QueueDisplay::front() const
 bool QueueDisplay::isEmpty() const
 {
     return m_strings.isEmpty();
+}
+
+int QueueDisplay::count() const
+{
+    return m_strings.count();
 }
 
 void QueueDisplay::setDirection(Direction dir)
