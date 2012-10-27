@@ -91,7 +91,7 @@ void MainWindow::loadSettings()
     ui->actionUnderline->setChecked(underline);
     slotUnderline(underline); // guarantee that m_display is updated
 
-    ui->actionAutoCommit->setChecked(settings.value("autocommit", false).toBool());
+    ui->actionAutoCommit->setChecked(settings.value("autocommit", true).toBool());
 
     restoreGeometry(settings.value("window_geometry").toByteArray());
 }

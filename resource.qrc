@@ -2,5 +2,9 @@
     <qresource prefix="/icon">
         <file>images/correct.png</file>
         <file>images/incorrect.png</file>
+        <file>images/file-open.png</file>
+        <file>images/exit.png</file>
+        <file>images/autocommit.png</file>
+        <file>images/skip.png</file>
     </qresource>
 </RCC>

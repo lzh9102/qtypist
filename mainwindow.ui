@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Typing Drill</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -77,22 +77,22 @@
     <addaction name="actionOpen"/>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuView">
+   <widget class="QMenu" name="menuSettings">
     <property name="title">
-     <string>&amp;View</string>
+     <string>&amp;Settings</string>
     </property>
+    <addaction name="actionAutoCommit"/>
     <addaction name="actionUnderline"/>
    </widget>
    <widget class="QMenu" name="menuTyping">
     <property name="title">
      <string>&amp;Typing</string>
     </property>
-    <addaction name="actionAutoCommit"/>
     <addaction name="actionSkip"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTyping"/>
-   <addaction name="menuView"/>
+   <addaction name="menuSettings"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -104,6 +104,10 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionExit">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/images/exit.png</normaloff>:/icon/images/exit.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Exit</string>
    </property>
@@ -127,6 +131,10 @@
    </property>
   </action>
   <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/images/file-open.png</normaloff>:/icon/images/file-open.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Open</string>
    </property>
@@ -135,11 +143,19 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/images/autocommit.png</normaloff>:/icon/images/autocommit.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Auto Commit</string>
    </property>
   </action>
   <action name="actionSkip">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/images/skip.png</normaloff>:/icon/images/skip.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Skip</string>
    </property>
