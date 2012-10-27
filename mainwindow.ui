@@ -139,6 +139,9 @@
    <property name="text">
     <string>&amp;Exit</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
   </action>
   <action name="actionDefaultFontSize">
    <property name="text">
@@ -166,6 +169,9 @@
    <property name="text">
     <string>&amp;Open</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="actionAutoCommit">
    <property name="checkable">
@@ -186,6 +192,9 @@
    </property>
    <property name="text">
     <string>&amp;Skip</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
   <action name="actionHideParen">
