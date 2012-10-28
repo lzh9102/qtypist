@@ -150,6 +150,9 @@
    <property name="text">
     <string>&amp;Exit</string>
    </property>
+   <property name="statusTip">
+    <string>Exit this program</string>
+   </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
    </property>
@@ -166,6 +169,9 @@
    <property name="text">
     <string>&amp;Underline</string>
    </property>
+   <property name="statusTip">
+    <string>Underline current word/sentence</string>
+   </property>
   </action>
   <action name="action_Skip">
    <property name="text">
@@ -179,6 +185,9 @@
    </property>
    <property name="text">
     <string>&amp;Open</string>
+   </property>
+   <property name="statusTip">
+    <string>Open training file</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -195,6 +204,9 @@
    <property name="text">
     <string>&amp;Auto Commit</string>
    </property>
+   <property name="statusTip">
+    <string>Auto commit input when finished</string>
+   </property>
   </action>
   <action name="actionSkip">
    <property name="icon">
@@ -203,6 +215,9 @@
    </property>
    <property name="text">
     <string>&amp;Skip</string>
+   </property>
+   <property name="statusTip">
+    <string>Skip current word/sentence</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
@@ -215,10 +230,16 @@
    <property name="text">
     <string>Hide &amp;Parenthesized</string>
    </property>
+   <property name="statusTip">
+    <string>Hide text inside parentheses</string>
+   </property>
   </action>
   <action name="actionAbout">
    <property name="text">
     <string>&amp;About This Program</string>
+   </property>
+   <property name="statusTip">
+    <string>See information about this program</string>
    </property>
   </action>
  </widget>

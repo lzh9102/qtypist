@@ -21,95 +21,150 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="20"/>
-        <location filename="../mainwindow.cpp" line="212"/>
+        <location filename="../mainwindow.cpp" line="215"/>
         <source>Typing Drill</source>
         <translation>打字練習</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="95"/>
+        <location filename="../mainwindow.ui" line="106"/>
         <source>&amp;File</source>
         <translation>檔案(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="102"/>
+        <location filename="../mainwindow.ui" line="113"/>
         <source>&amp;Settings</source>
         <translation>設定(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="110"/>
+        <location filename="../mainwindow.ui" line="121"/>
         <source>&amp;Typing</source>
         <translation>打字(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="116"/>
+        <location filename="../mainwindow.ui" line="127"/>
         <source>&amp;About</source>
         <translation>關於(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="140"/>
+        <location filename="../mainwindow.ui" line="151"/>
         <source>&amp;Exit</source>
         <translation>離開(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="145"/>
+        <location filename="../mainwindow.ui" line="154"/>
+        <source>Exit this program</source>
+        <translation>離開此程式</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="157"/>
+        <source>Ctrl+Q</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="162"/>
         <source>&amp;Default</source>
         <translation>預設(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="153"/>
+        <location filename="../mainwindow.ui" line="170"/>
         <source>&amp;Underline</source>
         <translation>底線(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="158"/>
-        <location filename="../mainwindow.ui" line="188"/>
+        <location filename="../mainwindow.ui" line="173"/>
+        <source>Underline current word/sentence</source>
+        <translation>用底線標示目前的字詞</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="178"/>
+        <location filename="../mainwindow.ui" line="217"/>
         <source>&amp;Skip</source>
         <translation>跳過(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="167"/>
+        <location filename="../mainwindow.ui" line="187"/>
         <source>&amp;Open</source>
         <translation>開啟(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="179"/>
+        <location filename="../mainwindow.ui" line="190"/>
+        <source>Open training file</source>
+        <translation>開啟訓練檔</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="193"/>
+        <source>Ctrl+O</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="205"/>
         <source>&amp;Auto Commit</source>
         <translation>自動送出(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="196"/>
+        <location filename="../mainwindow.ui" line="208"/>
+        <source>Auto commit input when finished</source>
+        <translation>輸入完成時自動傳送</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="220"/>
+        <source>Skip current word/sentence</source>
+        <translation>跳過目前的字詞</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="223"/>
+        <source>Ctrl+N</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="231"/>
         <source>Hide &amp;Parenthesized</source>
         <translation>隱藏括號(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="201"/>
+        <location filename="../mainwindow.ui" line="234"/>
+        <source>Hide text inside parentheses</source>
+        <translation>隱藏括號內的文字</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="239"/>
         <source>&amp;About This Program</source>
         <translation>關於此程式(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="99"/>
+        <location filename="../mainwindow.ui" line="242"/>
+        <source>See information about this program</source>
+        <translation>檢視此程式的相關資訊</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="102"/>
         <source>About this program</source>
         <translation>關於此程式</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="101"/>
+        <location filename="../mainwindow.cpp" line="104"/>
         <source>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 or 3.</source>
         <translation>這個程式是自由軟體，你可以在GNU授權條款(第二或第三版)下修改及散佈此軟體。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="206"/>
+        <location filename="../mainwindow.cpp" line="209"/>
         <source>Error</source>
         <translation>錯誤</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="207"/>
+        <location filename="../mainwindow.cpp" line="210"/>
         <source>Failed to read file.</source>
         <translation>無法開啟檔案</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="232"/>
+        <location filename="../mainwindow.cpp" line="238"/>
         <source>Max Speed: %1</source>
         <translation>最高速度: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="239"/>
+        <source>Average Speed: %1</source>
+        <translation>平均速度: %1</translation>
     </message>
 </context>
 </TS>
