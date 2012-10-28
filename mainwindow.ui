@@ -25,11 +25,22 @@
      <layout class="QHBoxLayout" name="chartLayout"/>
     </item>
     <item>
-     <widget class="QLabel" name="lblMaxSpeed">
-      <property name="text">
-       <string notr="true">lblMaxSpeed</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="lblMaxSpeed">
+        <property name="text">
+         <string notr="true">lblMaxSpeed</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblAvgSpeed">
+        <property name="text">
+         <string notr="true">lblAvgSpeed</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">

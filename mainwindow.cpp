@@ -19,17 +19,20 @@ MainWindow::MainWindow(QWidget *parent) :
     m_display(new QueueDisplay(this)),
     m_chart(new ChartDisplay(this)),
     m_dataSource(new DataSource(this)),
-    m_maxSpeed(0)
+    m_maxSpeed(0),
+    m_totalChars(0),
+    m_totalTime(0)
 {
     ui->setupUi(this);
     ui->displayLayout->addWidget(m_display);
     ui->chartLayout->addWidget(m_chart);
     ui->chartLayout->setSizeConstraint(QLayout::SetMaximumSize);
+    ui->lblAvgSpeed->setText("");
+    ui->lblMaxSpeed->setText("");
 
     setupToolbar();
     setupEvents();
     loadSettings();
-    updateChart(0, 0);
 }
 
 MainWindow::~MainWindow()
@@ -229,5 +232,9 @@ void MainWindow::updateChart(int count, int ms)
     m_chart->pushData(speed);
     if (speed > m_maxSpeed)
         m_maxSpeed = speed;
+    m_totalChars += count;
+    m_totalTime += ms;
+    double avg_speed = m_totalChars * 1000 * 60 / (m_totalTime+1);
     ui->lblMaxSpeed->setText(tr("Max Speed: %1").arg(m_maxSpeed));
+    ui->lblAvgSpeed->setText(tr("Average Speed: %1").arg(avg_speed));
 }

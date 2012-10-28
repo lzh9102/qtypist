@@ -37,6 +37,8 @@ private:
     DataSource *m_dataSource;
     QElapsedTimer m_elapsedTimer;
     double m_maxSpeed;
+    int m_totalChars;
+    double m_totalTime;
     void loadSettings();
     void saveSettings();
     void setupEvents();
