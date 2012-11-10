@@ -21,7 +21,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="20"/>
-        <location filename="../mainwindow.cpp" line="226"/>
+        <location filename="../mainwindow.cpp" line="227"/>
         <source>Typing Drill</source>
         <translation>打字練習</translation>
     </message>
@@ -147,22 +147,27 @@
         <translation>這個程式是自由軟體，你可以在GNU授權條款(第二或第三版)下修改及散佈此軟體。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="220"/>
+        <location filename="../mainwindow.cpp" line="117"/>
+        <source>Project Homepage: </source>
+        <translation>專案首頁: </translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="221"/>
         <source>Error</source>
         <translation>錯誤</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="221"/>
+        <location filename="../mainwindow.cpp" line="222"/>
         <source>Failed to read file.</source>
         <translation>無法開啟檔案</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="249"/>
+        <location filename="../mainwindow.cpp" line="250"/>
         <source>Max Speed: %1</source>
         <translation>最高速度: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="250"/>
+        <location filename="../mainwindow.cpp" line="251"/>
         <source>Average Speed: %1</source>
         <translation>平均速度: %1</translation>
     </message>
