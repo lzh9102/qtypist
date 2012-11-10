@@ -1,0 +1,14 @@
+Please put your typing list in this directory, the extension of the lists must
+be *.txt.
+
+A list consists of multiple lines, each line contains a word, for example:
+	
+	qwinff
+	countdown
+	qtypist
+
+You can also add a comment to each word surrounded by parentheses, for example:
+	
+	qwinff (a versatile media converter)
+	countdown (countdown timer written in bash)
+	qtypist (typing training program)
