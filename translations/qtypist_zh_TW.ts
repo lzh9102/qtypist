@@ -4,7 +4,7 @@
 <context>
     <name>ChartDisplay</name>
     <message>
-        <location filename="../chartdisplay.cpp" line="105"/>
+        <location filename="../chartdisplay.cpp" line="116"/>
         <source>Number: %1, Speed: %2</source>
         <translation>號碼: %1, 速度: %2</translation>
     </message>
@@ -21,7 +21,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="20"/>
-        <location filename="../mainwindow.cpp" line="215"/>
+        <location filename="../mainwindow.cpp" line="226"/>
         <source>Typing Drill</source>
         <translation>打字練習</translation>
     </message>
@@ -137,32 +137,32 @@
         <translation>檢視此程式的相關資訊</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="102"/>
+        <location filename="../mainwindow.cpp" line="113"/>
         <source>About this program</source>
         <translation>關於此程式</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="104"/>
+        <location filename="../mainwindow.cpp" line="115"/>
         <source>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 or 3.</source>
         <translation>這個程式是自由軟體，你可以在GNU授權條款(第二或第三版)下修改及散佈此軟體。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="209"/>
+        <location filename="../mainwindow.cpp" line="220"/>
         <source>Error</source>
         <translation>錯誤</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="210"/>
+        <location filename="../mainwindow.cpp" line="221"/>
         <source>Failed to read file.</source>
         <translation>無法開啟檔案</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="238"/>
+        <location filename="../mainwindow.cpp" line="249"/>
         <source>Max Speed: %1</source>
         <translation>最高速度: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="239"/>
+        <location filename="../mainwindow.cpp" line="250"/>
         <source>Average Speed: %1</source>
         <translation>平均速度: %1</translation>
     </message>

@@ -37,3 +37,7 @@ RESOURCES += \
 
 TRANSLATIONS += \
     translations/qtypist_zh_TW.ts
+
+win32 {
+    RC_FILE = appicon.rc
+}

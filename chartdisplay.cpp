@@ -16,7 +16,7 @@
 
 #define OFFSET_H 40
 #define OFFSET_V 10
-#define DEFAULT_COUNT 10
+#define DEFAULT_COUNT 20
 #define DEFAULT_COLOR QColor(150,200,220)
 #define DEFAULT_WIDTH 3
 #define BG_COLOR QColor(255,255,255)
