@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Typing Drill</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/icon/images/appicon.png</normaloff>:/icon/images/appicon.png</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>

@@ -6,5 +6,6 @@
         <file>images/exit.png</file>
         <file>images/autocommit.png</file>
         <file>images/skip.png</file>
+        <file>images/appicon.png</file>
     </qresource>
 </RCC>
