@@ -9,43 +9,20 @@
  * project page: http://code.google.com/p/qtypist
  */
 
-#include "paths.h"
-#include <QDir>
-#include <QDebug>
+#ifndef PATHS_H
+#define PATHS_H
 
-namespace {
-    QString app_path;
-}
+#include <QString>
 
-void Paths::setAppPath(const QString &path)
+class Paths
 {
-    app_path = path;
-    qDebug() << "Set application path: " + app_path;
-    qDebug() << "Application Path: " + app_path;
-    qDebug() << "Data Path: " + dataPath();
-    qDebug() << "translationPath: " + translationPath();
-}
+public:
+    static void setAppPath(const QString& path);
+    static QString appPath();
 
-QString Paths::appPath()
-{
-    return app_path;
-}
+    static QString dataPath();
+    static QString dataFileName(const QString& filename);
+    static QString translationPath();
+};
 
-QString Paths::dataPath()
-{
-#ifdef DATA_PATH
-    return QString(DATA_PATH);
-#else
-    return app_path;
-#endif
-}
-
-QString Paths::dataFileName(const QString &filename)
-{
-    return QDir(dataPath()).absoluteFilePath(filename);
-}
-
-QString Paths::translationPath()
-{
-    return QDir(dataPath()).absoluteFilePath("translations");
-}
+#endif // PATHS_H
