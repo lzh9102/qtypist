@@ -113,7 +113,8 @@ void MainWindow::slotAbout()
                 tr("About this program"),
                 "qtypist (C) 2012 Timothy Lin\n\n"
                 + tr("This program is free software; you can redistribute it and/or modify it "
-                     "under the terms of the GNU General Public License version 2 or 3."));
+                     "under the terms of the GNU General Public License version 2 or 3.")
+                + "\n\n" + tr("Project Homepage: ") + "http://code.google.com/p/qtypist");
 }
 
 void MainWindow::loadSettings()

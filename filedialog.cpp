@@ -45,6 +45,8 @@ FileDialog::FileDialog(QWidget *parent) :
     ui->listFiles->setCurrentRow(prev_index);
 
     connect(this, SIGNAL(accepted()), this, SLOT(slotAccepted()));
+    connect(ui->listFiles, SIGNAL(doubleClicked(QModelIndex))
+            , this, SLOT(accept()));
 }
 
 FileDialog::~FileDialog()
