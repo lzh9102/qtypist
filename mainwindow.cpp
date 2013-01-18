@@ -16,7 +16,7 @@
 #include <QElapsedTimer>
 #include <QDebug>
 #include "ui_mainwindow.h"
-#include "queuedisplay.h"
+#include "historydisplay.h"
 #include "chartdisplay.h"
 #include "filedialog.h"
 #include "datasource.h"
@@ -27,7 +27,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    m_display(new QueueDisplay(this)),
+    m_display(new HistoryDisplay(this)),
     m_chart(new ChartDisplay(this)),
     m_dataSource(new DataSource(this)),
     m_maxSpeed(0),

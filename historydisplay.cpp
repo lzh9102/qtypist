@@ -9,7 +9,7 @@
  * project page: http://code.google.com/p/qtypist
  */
 
-#include "queuedisplay.h"
+#include "historydisplay.h"
 #include <QPainter>
 #include <QPen>
 #include <QDebug>
@@ -17,7 +17,7 @@
 
 #define DEFAULT_DISPLAY_COUNT 50
 
-QueueDisplay::QueueDisplay(QWidget *parent) :
+HistoryDisplay::HistoryDisplay(QWidget *parent) :
     QWidget(parent),
     m_displayCount(DEFAULT_DISPLAY_COUNT),
     m_direction(BOTTOM_TO_TOP),
@@ -26,7 +26,7 @@ QueueDisplay::QueueDisplay(QWidget *parent) :
 {
 }
 
-void QueueDisplay::setDisplayCount(int n)
+void HistoryDisplay::setDisplayCount(int n)
 {
     if (n > 0) {
         m_displayCount = n;
@@ -34,14 +34,14 @@ void QueueDisplay::setDisplayCount(int n)
     }
 }
 
-void QueueDisplay::push(QString s)
+void HistoryDisplay::push(QString s)
 {
     m_strings.push_back(s);
     if (m_displayCount >= m_strings.size())
         repaint();
 }
 
-void QueueDisplay::pop()
+void HistoryDisplay::pop()
 {
     if (!m_strings.isEmpty()) {
         m_strings.pop_front();
@@ -50,13 +50,13 @@ void QueueDisplay::pop()
         qWarning("QueueDisplay::pop(): the queue is empty");
 }
 
-void QueueDisplay::clear()
+void HistoryDisplay::clear()
 {
     m_strings.clear();
     repaint();
 }
 
-QString QueueDisplay::front() const
+QString HistoryDisplay::front() const
 {
     if (!m_strings.isEmpty())
         return m_strings.front();
@@ -66,17 +66,17 @@ QString QueueDisplay::front() const
     }
 }
 
-bool QueueDisplay::isEmpty() const
+bool HistoryDisplay::isEmpty() const
 {
     return m_strings.isEmpty();
 }
 
-int QueueDisplay::count() const
+int HistoryDisplay::count() const
 {
     return m_strings.count();
 }
 
-void QueueDisplay::setDirection(Direction dir)
+void HistoryDisplay::setDirection(Direction dir)
 {
     switch (dir) {
     case TOP_TO_BOTTOM:
@@ -89,7 +89,7 @@ void QueueDisplay::setDirection(Direction dir)
     }
 }
 
-void QueueDisplay::setUnderlineFront(bool b)
+void HistoryDisplay::setUnderlineFront(bool b)
 {
     if (m_underline != b) {
         m_underline = b;
@@ -97,7 +97,7 @@ void QueueDisplay::setUnderlineFront(bool b)
     }
 }
 
-void QueueDisplay::setFontSize(int p)
+void HistoryDisplay::setFontSize(int p)
 {
     QFont font = this->font();
     font.setPointSize(p);
@@ -105,13 +105,13 @@ void QueueDisplay::setFontSize(int p)
     repaint();
 }
 
-void QueueDisplay::setHideParen(bool b)
+void HistoryDisplay::setHideParen(bool b)
 {
     m_hideParen = b;
     repaint();
 }
 
-void QueueDisplay::paintEvent(QPaintEvent *)
+void HistoryDisplay::paintEvent(QPaintEvent *)
 {
     const int count = std::min(m_strings.size(), m_displayCount);
     QPainter painter(this);

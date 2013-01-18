@@ -9,16 +9,16 @@
  * project page: http://code.google.com/p/qtypist
  */
 
-#ifndef QUEUEDISPLAY_H
-#define QUEUEDISPLAY_H
+#ifndef HISTORYDISPLAY_H
+#define HISTORYDISPLAY_H
 
 #include <QWidget>
 
-class QueueDisplay : public QWidget
+class HistoryDisplay : public QWidget
 {
     Q_OBJECT
 public:
-    explicit QueueDisplay(QWidget *parent = 0);
+    explicit HistoryDisplay(QWidget *parent = 0);
     enum Direction { TOP_TO_BOTTOM, BOTTOM_TO_TOP };
 
     QString front() const;
@@ -46,4 +46,4 @@ private:
     void paintEvent(QPaintEvent *);
 };
 
-#endif // QUEUEDISPLAY_H
+#endif // HISTORYDISPLAY_H

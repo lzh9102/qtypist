@@ -19,7 +19,7 @@ namespace Ui {
 class MainWindow;
 }
 
-class QueueDisplay;
+class HistoryDisplay;
 class ChartDisplay;
 class DataSource;
 
@@ -43,7 +43,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QueueDisplay *m_display;
+    HistoryDisplay *m_display;
     ChartDisplay *m_chart;
     DataSource *m_dataSource;
     QElapsedTimer m_elapsedTimer;

@@ -14,20 +14,20 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    queuedisplay.cpp \
     stringmatching.cpp \
     filedialog.cpp \
     paths.cpp \
     datasource.cpp \
-    chartdisplay.cpp
+    chartdisplay.cpp \
+    historydisplay.cpp
 
 HEADERS  += mainwindow.h \
-    queuedisplay.h \
     stringmatching.h \
     filedialog.h \
     paths.h \
     datasource.h \
-    chartdisplay.h
+    chartdisplay.h \
+    historydisplay.h
 
 FORMS    += mainwindow.ui \
     filedialog.ui
