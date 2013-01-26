@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->chartLayout->setSizeConstraint(QLayout::SetMaximumSize);
     ui->lblAvgSpeed->setText("");
     ui->lblMaxSpeed->setText("");
+    ui->actionHideParen->setVisible(false);
 
     setupToolbar();
     setupEvents();
@@ -52,48 +53,50 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// proceed to next word
+void MainWindow::slotNext()
+{
+    m_display->push(m_dataSource->current());
+    ui->lblInput->setText(m_dataSource->next());
+    ui->txtInput->clear();
+    m_elapsedTimer.restart();
+}
+
 // Handle Return key in the input box
 void MainWindow::slotHandleInput()
 {
     QString string = ui->txtInput->text().trimmed();
-    if (!string.isEmpty() && !m_display->isEmpty()) {
+    if (!string.isEmpty()) {
         const bool correct = judgeInput(string);
         if (correct) { // correct input
-            ui->txtInput->clear();
-            m_display->pop();
-            updateChart(string.size(), m_elapsedTimer.elapsed());
-            m_elapsedTimer.restart();
+            slotNext();
         } else { // incorrect input
             ui->txtInput->selectAll();
         }
         updateStatus(correct);
-        refillQueue();
     }
 }
 
 void MainWindow::slotTextEdited()
 {
-    if (!m_display->isEmpty() && ui->actionAutoCommit->isChecked()) {
+    if (!ui->lblInput->text().isEmpty()
+            && ui->actionAutoCommit->isChecked()) {
         if (judgeInput(ui->txtInput->text()))
             slotHandleInput();
     }
 }
 
-void MainWindow::slotSkip()
-{
-    if (!m_display->isEmpty()) {
-        m_display->pop();
-    }
-}
-
 void MainWindow::slotUnderline(bool checked)
 {
-    m_display->setUnderlineFront(checked);
+    QFont font = ui->lblInput->font();
+    font.setUnderline(checked);
+    ui->lblInput->setFont(font);
 }
 
 void MainWindow::slotHideParen(bool checked)
 {
-    m_display->setHideParen(checked);
+    // TODO: remove this slot
+    //m_display->setHideParen(checked);
 }
 
 void MainWindow::slotWindowLoaded()
@@ -125,6 +128,8 @@ void MainWindow::loadSettings()
     QFont font = ui->txtInput->font();
     font.setPointSize(font_size);
     ui->txtInput->setFont(font);
+    font.setBold(true);
+    ui->lblInput->setFont(font);
     m_display->setFontSize(font_size);
 
     const bool underline = settings.value("underline", true).toBool();
@@ -164,7 +169,7 @@ void MainWindow::setupEvents()
     connect(ui->txtInput, SIGNAL(textChanged(QString))
             , this, SLOT(slotTextEdited()));
     connect(ui->actionSkip, SIGNAL(triggered())
-            , this, SLOT(slotSkip()));
+            , this, SLOT(slotNext()));
     connect(ui->actionHideParen, SIGNAL(triggered(bool))
             , this, SLOT(slotHideParen(bool)));
     connect(ui->actionAbout, SIGNAL(triggered())
@@ -184,7 +189,7 @@ void MainWindow::setupToolbar()
 bool MainWindow::judgeInput(QString string)
 {
     // remove text quoted by parenthesis
-    QString expect = m_display->front();
+    QString expect = m_dataSource->current();
     expect.remove(QRegExp("\\([^)]*\\)"));
     return string.trimmed() == expect.trimmed();
 }
@@ -222,19 +227,11 @@ void MainWindow::openFileDialog()
                                   , tr("Failed to read file."));
         } else { // file opened successfully
             m_display->clear();
-            refillQueue();
+            slotNext();
             setWindowTitle(QString("%1 - %2").arg(dialog.selectedName())
                            .arg(tr("Typing Drill")));
             m_elapsedTimer.restart();
         }
-    }
-}
-
-void MainWindow::refillQueue()
-{
-    if (!m_dataSource->isEmpty()) {
-        while (m_display->count() < MIN_LINE_COUNT)
-            m_display->push(m_dataSource->next());
     }
 }
 

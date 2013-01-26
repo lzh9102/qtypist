@@ -15,6 +15,7 @@
 #include <QDebug>
 #include <algorithm>
 
+#define MAX_HISTORY 100
 #define DEFAULT_DISPLAY_COUNT 50
 
 HistoryDisplay::HistoryDisplay(QWidget *parent) :
@@ -36,39 +37,16 @@ void HistoryDisplay::setDisplayCount(int n)
 
 void HistoryDisplay::push(QString s)
 {
-    m_strings.push_back(s);
-    if (m_displayCount >= m_strings.size())
-        repaint();
-}
-
-void HistoryDisplay::pop()
-{
-    if (!m_strings.isEmpty()) {
-        m_strings.pop_front();
-        repaint();
-    } else
-        qWarning("QueueDisplay::pop(): the queue is empty");
+    m_strings.push_front(s);
+    if (m_strings.size() > MAX_HISTORY)
+        m_strings.pop_back();
+    repaint();
 }
 
 void HistoryDisplay::clear()
 {
     m_strings.clear();
     repaint();
-}
-
-QString HistoryDisplay::front() const
-{
-    if (!m_strings.isEmpty())
-        return m_strings.front();
-    else {
-        qWarning("QueueDisplay::top(): the queue is empty");
-        return QString();
-    }
-}
-
-bool HistoryDisplay::isEmpty() const
-{
-    return m_strings.isEmpty();
 }
 
 int HistoryDisplay::count() const
@@ -130,18 +108,18 @@ void HistoryDisplay::paintEvent(QPaintEvent *)
 
         painter.setOpacity(opacity);
 
-        if (i == 0) {
-            QFont font = painter.font();
-            if (m_underline)
-                font.setUnderline(true);
-            font.setBold(true);
-            painter.setFont(font);
-        } else {
-            QFont font = painter.font();
-            font.setUnderline(false);
-            font.setBold(false);
-            painter.setFont(font);
-        }
+//        if (i == 0) {
+//            QFont font = painter.font();
+//            if (m_underline)
+//                font.setUnderline(true);
+//            font.setBold(true);
+//            painter.setFont(font);
+//        } else {
+//            QFont font = painter.font();
+//            font.setUnderline(false);
+//            font.setBold(false);
+//            painter.setFont(font);
+//        }
 
         QString string = m_strings[i];
         if (m_hideParen)

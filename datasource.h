@@ -28,9 +28,11 @@ public:
     bool isEmpty() const;
 
     QString next();
+    QString current();
 
 private:
     QStringList m_list;
+    int m_index;
 };
 
 #endif // DATASOURCE_H

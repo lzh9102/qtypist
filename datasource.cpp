@@ -15,7 +15,7 @@
 #include <cstdlib>
 
 DataSource::DataSource(QObject *parent) :
-    QObject(parent)
+    QObject(parent), m_index(-1)
 {
 }
 
@@ -55,6 +55,16 @@ QString DataSource::next()
 {
     if (m_list.isEmpty())
         return "";
+    else {
+        m_index = rand() % m_list.size();
+        return m_list[m_index].trimmed();
+    }
+}
+
+QString DataSource::current()
+{
+    if (m_index < 0)
+        return "";
     else
-        return m_list[rand() % m_list.size()].trimmed();
+        return m_list[m_index].trimmed();
 }

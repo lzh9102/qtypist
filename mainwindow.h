@@ -32,9 +32,9 @@ public:
     ~MainWindow();
 
 private slots:
+    void slotNext();
     void slotHandleInput();
     void slotTextEdited();
-    void slotSkip();
     void slotUnderline(bool);
     void slotHideParen(bool);
     void slotWindowLoaded();
@@ -57,7 +57,6 @@ private:
     bool judgeInput(QString string);
     void updateStatus(bool correct);
     void openFileDialog();
-    void refillQueue();
     void updateChart(int count, int ms);
 };
 

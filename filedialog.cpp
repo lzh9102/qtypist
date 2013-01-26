@@ -42,7 +42,7 @@ FileDialog::FileDialog(QWidget *parent) :
     }
 
     ui->listFiles->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->listFiles->setCurrentRow(prev_index);
+    ui->listFiles->setCurrentRow(prev_index, QItemSelectionModel::SelectCurrent);
 
     connect(this, SIGNAL(accepted()), this, SLOT(slotAccepted()));
     connect(ui->listFiles, SIGNAL(doubleClicked(QModelIndex))
