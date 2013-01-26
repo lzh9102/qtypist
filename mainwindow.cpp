@@ -15,11 +15,13 @@
 #include <QTimer>
 #include <QElapsedTimer>
 #include <QDebug>
+#include <algorithm>
 #include "ui_mainwindow.h"
 #include "historydisplay.h"
 #include "chartdisplay.h"
 #include "filedialog.h"
 #include "datasource.h"
+#include "stringmatching.h"
 
 #define DEFAULT_FONT_SIZE 25
 #define MIN_LINE_COUNT 50
@@ -71,7 +73,7 @@ void MainWindow::slotHandleInput()
         if (correct) { // correct input
             slotNext();
         } else { // incorrect input
-            ui->txtInput->selectAll();
+            selectFirstError();
         }
         updateStatus(correct);
     }
@@ -79,10 +81,12 @@ void MainWindow::slotHandleInput()
 
 void MainWindow::slotTextEdited()
 {
-    if (!ui->lblInput->text().isEmpty()
-            && ui->actionAutoCommit->isChecked()) {
-        if (judgeInput(ui->txtInput->text()))
+    if (!ui->lblInput->text().isEmpty()) {
+        highlightError();
+        if (ui->actionAutoCommit->isChecked()
+                && judgeInput(ui->txtInput->text())) {
             slotHandleInput();
+        }
     }
 }
 
@@ -184,6 +188,62 @@ void MainWindow::setupToolbar()
     ui->toolBar->addAction(ui->actionOpen);
     ui->toolBar->addAction(ui->actionSkip);
     ui->toolBar->addAction(ui->actionAutoCommit);
+}
+
+// highlight mistyped characters
+void MainWindow::highlightError()
+{
+    QString expect = m_dataSource->current().trimmed();
+    QString input = ui->txtInput->text().trimmed();
+    QStringList markup;
+    QString tag_begin, tag_end;
+    //ui->lblInput->
+    //const int length = std::min(expect.size(), input.size());
+    for (int i=0; i<expect.size(); i++) {
+        if (i < input.size()) {
+            if (input.at(i) == expect.at(i)) { // correct
+                tag_begin = "<font color='green'>";
+                tag_end = "</font>";
+            } else { // incorrect
+                tag_begin = "<font color='red'>";
+                tag_end = "</font>";
+            }
+        } else { // not typed
+            tag_begin = "";
+            tag_end = "";
+        }
+        markup << tag_begin << expect.at(i) << tag_end;
+    }
+    ui->lblInput->setText(markup.join(""));
+}
+
+void MainWindow::selectFirstError()
+{
+    QString input = ui->txtInput->text().trimmed();
+    if (!input.isEmpty()) {
+        QString expect = m_dataSource->current().trimmed();
+        int offset = ui->txtInput->text().indexOf(input.at(0));
+        const int length = std::min(input.size(), expect.size());
+        int index_begin = -1, index_end = length-1;
+        for (int i=0; i<length; i++) {
+            if (input.at(i) == expect.at(i)) {
+                if (index_begin >= 0) {
+                    index_end = i-1;
+                    break;
+                }
+            } else { // mismatch
+                if (index_begin < 0)
+                    index_begin = i;
+            }
+        }
+        if (index_begin < 0 && input.size() > expect.size()) {
+            index_begin = expect.size();
+            index_end = input.size() - 1;
+        }
+        if (index_begin >= 0) {
+            ui->txtInput->setSelection(index_begin + offset, index_end - index_begin + 1);
+        }
+    }
 }
 
 bool MainWindow::judgeInput(QString string)

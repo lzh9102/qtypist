@@ -54,6 +54,8 @@ private:
     void saveSettings();
     void setupEvents();
     void setupToolbar();
+    void highlightError();
+    void selectFirstError();
     bool judgeInput(QString string);
     void updateStatus(bool correct);
     void openFileDialog();
