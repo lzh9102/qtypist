@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->chartLayout->setSizeConstraint(QLayout::SetMaximumSize);
     ui->lblAvgSpeed->setText("");
     ui->lblMaxSpeed->setText("");
+    ui->lblInput->setText("");
     ui->actionHideParen->setVisible(false);
 
     setupToolbar();
