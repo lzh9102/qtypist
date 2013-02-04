@@ -44,6 +44,7 @@ bool DataSource::addFile(const QString &filename)
 void DataSource::clear()
 {
     m_list.clear();
+    m_index = -1;
 }
 
 bool DataSource::isEmpty() const
