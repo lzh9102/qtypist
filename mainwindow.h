@@ -22,6 +22,7 @@ class MainWindow;
 class HistoryDisplay;
 class ChartDisplay;
 class DataSource;
+class WorkingSet;
 
 class MainWindow : public QMainWindow
 {
@@ -46,6 +47,7 @@ private:
     HistoryDisplay *m_display;
     ChartDisplay *m_chart;
     DataSource *m_dataSource;
+    WorkingSet *m_workingSet;
     QElapsedTimer m_elapsedTimer;
     double m_maxSpeed;
     int m_totalChars;

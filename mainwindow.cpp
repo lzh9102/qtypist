@@ -22,6 +22,7 @@
 #include "filedialog.h"
 #include "datasource.h"
 #include "stringmatching.h"
+#include "workingset.h"
 
 #define DEFAULT_FONT_SIZE 25
 #define MIN_LINE_COUNT 50
@@ -32,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_display(new HistoryDisplay(this)),
     m_chart(new ChartDisplay(this)),
     m_dataSource(new DataSource(this)),
+    m_workingSet(new WorkingSet(*m_dataSource, this)),
     m_maxSpeed(0),
     m_totalChars(0),
     m_totalTime(0)
@@ -59,8 +61,12 @@ MainWindow::~MainWindow()
 // proceed to next word
 void MainWindow::slotNext()
 {
-    m_display->push(m_dataSource->current());
-    ui->lblInput->setText(m_dataSource->next());
+    const QString s = m_workingSet->current();
+    int average_time = 0;
+    if (s.length() > 0)
+        average_time = m_elapsedTimer.msecsSinceReference() / s.length();
+    m_display->push(s);
+    ui->lblInput->setText(m_workingSet->next(average_time));
     ui->txtInput->clear();
     m_elapsedTimer.restart();
 }
@@ -194,7 +200,7 @@ void MainWindow::setupToolbar()
 // highlight mistyped characters
 void MainWindow::highlightError()
 {
-    QString expect = m_dataSource->current().trimmed();
+    QString expect = m_workingSet->current().trimmed();
     QString input = ui->txtInput->text().trimmed();
     QStringList markup;
     QString tag_begin, tag_end;
@@ -222,7 +228,7 @@ void MainWindow::selectFirstError()
 {
     QString input = ui->txtInput->text().trimmed();
     if (!input.isEmpty()) {
-        QString expect = m_dataSource->current().trimmed();
+        QString expect = m_workingSet->current().trimmed();
         int offset = ui->txtInput->text().indexOf(input.at(0));
         const int length = std::min(input.size(), expect.size());
         int index_begin = -1, index_end = length-1;
@@ -250,7 +256,7 @@ void MainWindow::selectFirstError()
 bool MainWindow::judgeInput(QString string)
 {
     // remove text quoted by parenthesis
-    QString expect = m_dataSource->current();
+    QString expect = m_workingSet->current();
     expect.remove(QRegExp("\\([^)]*\\)"));
     return string.trimmed() == expect.trimmed();
 }
@@ -283,6 +289,7 @@ void MainWindow::openFileDialog()
     if (dialog.exec() == QDialog::Accepted) {
         // remove existing phrases and load the new list
         m_dataSource->clear();
+        m_workingSet->reset();
         if (!m_dataSource->addFile(dialog.selectedFile())) {
             QMessageBox::critical(this, tr("Error")
                                   , tr("Failed to read file."));

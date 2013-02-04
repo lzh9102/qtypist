@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     paths.cpp \
     datasource.cpp \
     chartdisplay.cpp \
-    historydisplay.cpp
+    historydisplay.cpp \
+    workingset.cpp
 
 HEADERS  += mainwindow.h \
     stringmatching.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     paths.h \
     datasource.h \
     chartdisplay.h \
-    historydisplay.h
+    historydisplay.h \
+    workingset.h
 
 FORMS    += mainwindow.ui \
     filedialog.ui
