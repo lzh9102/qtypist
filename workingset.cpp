@@ -1,11 +1,13 @@
 #include "workingset.h"
+#include "datasource.h"
 #include <limits>
 #include <cstdlib>
-#include "datasource.h"
+#include <QDebug>
 
 #define DEFAULT_SIZE 3
-#define DEFAULT_COUNT 2
-#define INITIAL_PRIORITY std::numeric_limits<int>::max()
+#define DEFAULT_COUNT 5
+//#define INITIAL_PRIORITY std::numeric_limits<int>::max()
+#define INITIAL_PRIORITY 0
 
 WorkingSet::WorkingSet(DataSource &source, QObject *parent) :
     QObject(parent), m_source(source), m_size(DEFAULT_SIZE), m_index(-1)
@@ -27,11 +29,10 @@ QString WorkingSet::next(int priority)
     const int size = m_list.size();
     int index = -1;
     for (int i=0; i<size-1; i++) {
-        if (rand() & 1) { // 1/2 chance to choose the item with higher priority
+        if (rand() % 2 == 0) { // 1/2 chance to choose the item with higher priority
             index = i;
             break;
         }
-        // another 1/2 chance to choose items with lower priority
     }
     if (index == -1) { // no item has been selected, use the last item
         index = size-1;
@@ -70,6 +71,12 @@ void WorkingSet::updatePriority(int priority)
         m_list[m_index].priority = priority;
         qSort(m_list);
     }
+
+    QString dbgmsg = "updatePriority(): ";
+    for (int i=0; i<m_list.size(); i++) {
+        dbgmsg += m_list[i].word + " " + QString::number(m_list[i].priority) + "; ";
+    }
+    qDebug() << dbgmsg;
 }
 
 void WorkingSet::loadWords(int n)
@@ -78,4 +85,10 @@ void WorkingSet::loadWords(int n)
         m_list.push_back(Entry(m_source.next(), INITIAL_PRIORITY));
     }
     qSort(m_list);
+
+    QString dbgmsg = "loadWords(): ";
+    for (int i=0; i<m_list.size(); i++) {
+        dbgmsg += m_list[i].word + " " + QString::number(m_list[i].priority) + "; ";
+    }
+    qDebug() << dbgmsg;
 }
