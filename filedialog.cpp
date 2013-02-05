@@ -26,20 +26,22 @@ FileDialog::FileDialog(QWidget *parent) :
     QSettings settings;
     QString prev_list = settings.value("file_prev", "").toString();
     int prev_index = 0;
+    qDebug() << "prev_list: " << prev_list;
 
     QDir dir(Paths::dataFileName("lists"));
     dir.setFilter(QDir::Files);
-    QStringList list = dir.entryList();
+    QStringList list = dir.entryList(QStringList() << "*.txt");
     for (int i=0; i<list.size(); i++) {
         QString file = list.at(i);
-        if (file.endsWith(".txt")) {
-            qDebug() << "found file: " << file;
-            file.chop(sizeof(".txt")-1);
-            ui->listFiles->addItem(file);
-            if (prev_list == file)
-                prev_index = i;
-        }
+        Q_ASSERT(file.endsWith(".txt"));
+        qDebug() << "found file: " << file;
+        file.chop(sizeof(".txt")-1);
+        qDebug() << "file: " << file;
+        ui->listFiles->addItem(file);
+        if (prev_list == file)
+            prev_index = i;
     }
+    qDebug() << "index: " << prev_index;
 
     ui->listFiles->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->listFiles->setCurrentRow(prev_index, QItemSelectionModel::SelectCurrent);
