@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     m_display(new HistoryDisplay(this)),
-    m_chart(new ChartDisplay(this)),
+    //m_chart(new ChartDisplay(this)),
     m_dataSource(new DataSource(this)),
     m_workingSet(new WorkingSet(*m_dataSource, this)),
     m_maxSpeed(0),
@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->displayLayout->addWidget(m_display);
-    ui->chartLayout->addWidget(m_chart);
+    //ui->chartLayout->addWidget(m_chart);
     ui->chartLayout->setSizeConstraint(QLayout::SetMaximumSize);
     ui->lblAvgSpeed->setText("");
     ui->lblMaxSpeed->setText("");
