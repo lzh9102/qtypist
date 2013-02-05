@@ -4,10 +4,10 @@
 #include <cstdlib>
 #include <QDebug>
 
-#define DEFAULT_SIZE 3
-#define DEFAULT_COUNT 5
-//#define INITIAL_PRIORITY std::numeric_limits<int>::max()
-#define INITIAL_PRIORITY 0
+#define DEFAULT_SIZE 10
+#define DEFAULT_COUNT 10
+#define INITIAL_PRIORITY std::numeric_limits<int>::max()
+//#define INITIAL_PRIORITY 0
 
 WorkingSet::WorkingSet(DataSource &source, QObject *parent) :
     QObject(parent), m_source(source), m_size(DEFAULT_SIZE), m_index(-1)
@@ -40,9 +40,8 @@ QString WorkingSet::next(int priority)
     m_index = index;
     if (m_index >= 0) {
         Entry& entry = m_list[m_index];
-        if (entry.count >= DEFAULT_COUNT && m_index >= size / 2) {
-            // the word has appeared enough times
-            // and it is in the less-priority half
+        if (entry.count >= DEFAULT_COUNT) {
+            // if the word has appeared enough times
             // then remove it from the list
             // and load a new word
             m_list.removeAt(m_index);

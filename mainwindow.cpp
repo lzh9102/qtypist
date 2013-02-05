@@ -62,7 +62,9 @@ MainWindow::~MainWindow()
 void MainWindow::slotNext()
 {
     const QString s = m_workingSet->current();
-    const int average_time = m_elapsedTimer.elapsed();
+    int average_time = m_elapsedTimer.elapsed();
+    if (!s.isEmpty())
+        average_time /= s.size();
     m_display->push(s);
     ui->lblInput->setText(m_workingSet->next(average_time));
     ui->txtInput->clear();
