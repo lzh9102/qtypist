@@ -5,7 +5,7 @@
 #include <QDebug>
 
 #define DEFAULT_SIZE 10
-#define DEFAULT_COUNT 10
+#define DEFAULT_COUNT 5
 #define INITIAL_PRIORITY std::numeric_limits<int>::max()
 //#define INITIAL_PRIORITY 0
 
