@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     chartdisplay.cpp \
     historydisplay.cpp \
     workingset.cpp \
-    httpdownloader.cpp
+    httpdownloader.cpp \
+    audioplayer.cpp
 
 HEADERS  += mainwindow.h \
     stringmatching.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     chartdisplay.h \
     historydisplay.h \
     workingset.h \
-    httpdownloader.h
+    httpdownloader.h \
+    audioplayer.h
 
 FORMS    += mainwindow.ui \
     filedialog.ui
