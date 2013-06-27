@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     datasource.cpp \
     chartdisplay.cpp \
     historydisplay.cpp \
-    workingset.cpp
+    workingset.cpp \
+    httpdownloader.cpp
 
 HEADERS  += mainwindow.h \
     stringmatching.h \
@@ -29,7 +30,8 @@ HEADERS  += mainwindow.h \
     datasource.h \
     chartdisplay.h \
     historydisplay.h \
-    workingset.h
+    workingset.h \
+    httpdownloader.h
 
 FORMS    += mainwindow.ui \
     filedialog.ui
