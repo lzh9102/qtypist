@@ -61,12 +61,16 @@ MainWindow::~MainWindow()
 // proceed to next word
 void MainWindow::slotNext()
 {
-    const QString s = m_workingSet->current();
+    const QString s = m_workingSet->currentPhrase();
     int average_time = m_elapsedTimer.elapsed();
     if (!s.isEmpty())
         average_time /= s.size();
     m_display->push(s);
-    ui->lblInput->setText(m_workingSet->next(average_time));
+    m_workingSet->updatePriority(average_time);
+    m_workingSet->next();
+    QString phrase = m_workingSet->currentPhrase();
+    QString comment = m_workingSet->currentComment();
+    setInputHint(phrase, comment);
     ui->txtInput->clear();
     m_elapsedTimer.restart();
 }
@@ -104,7 +108,7 @@ void MainWindow::slotUnderline(bool checked)
     ui->lblInput->setFont(font);
 }
 
-void MainWindow::slotHideParen(bool checked)
+void MainWindow::slotHideParen(bool /*checked*/)
 {
     // TODO: remove this slot
     //m_display->setHideParen(checked);
@@ -200,7 +204,7 @@ void MainWindow::setupToolbar()
 // highlight mistyped characters
 void MainWindow::highlightError()
 {
-    QString expect = m_workingSet->current().trimmed();
+    QString expect = m_workingSet->currentPhrase().trimmed();
     QString input = ui->txtInput->text().trimmed();
     QStringList markup;
     QString tag_begin, tag_end;
@@ -221,14 +225,14 @@ void MainWindow::highlightError()
         }
         markup << tag_begin << expect.at(i) << tag_end;
     }
-    ui->lblInput->setText(markup.join(""));
+    setInputHint(markup.join(""), m_workingSet->currentComment());
 }
 
 void MainWindow::selectFirstError()
 {
     QString input = ui->txtInput->text().trimmed();
     if (!input.isEmpty()) {
-        QString expect = m_workingSet->current().trimmed();
+        QString expect = m_workingSet->currentPhrase().trimmed();
         int offset = ui->txtInput->text().indexOf(input.at(0));
         const int length = std::min(input.size(), expect.size());
         int index_begin = -1, index_end = length-1;
@@ -255,9 +259,7 @@ void MainWindow::selectFirstError()
 
 bool MainWindow::judgeInput(QString string)
 {
-    // remove text quoted by parenthesis
-    QString expect = m_workingSet->current();
-    expect.remove(QRegExp("\\([^)]*\\)"));
+    QString expect = m_workingSet->currentPhrase();
     return string.trimmed() == expect.trimmed();
 }
 
@@ -314,4 +316,12 @@ void MainWindow::updateChart(int count, int ms)
     double avg_speed = m_totalChars * 1000 * 60 / (m_totalTime+1);
     ui->lblMaxSpeed->setText(tr("Max Speed: %1").arg(m_maxSpeed));
     ui->lblAvgSpeed->setText(tr("Average Speed: %1").arg(avg_speed));
+}
+
+void MainWindow::setInputHint(QString phrase, QString comment)
+{
+    QString hint = QString("%1").arg(phrase);
+    if (!comment.isEmpty())
+        hint.append(QString(" (%1)").arg(comment));
+    ui->lblInput->setText(hint);
 }

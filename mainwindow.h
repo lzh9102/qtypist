@@ -62,6 +62,7 @@ private:
     void updateStatus(bool correct);
     void openFileDialog();
     void updateChart(int count, int ms);
+    void setInputHint(QString phrase, QString comment);
 };
 
 #endif // MAINWINDOW_H

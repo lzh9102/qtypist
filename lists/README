@@ -7,8 +7,9 @@ A list consists of multiple lines, each line contains a word, for example:
 	countdown
 	qtypist
 
-You can also add a comment to each word surrounded by parentheses, for example:
+You can also add a comment after each word separated by a tab or multiple
+spaces, for example:
 	
-	qwinff (a versatile media converter)
-	countdown (countdown timer written in bash)
-	qtypist (typing training program)
+	qwinff  a versatile media converter
+	countdown	countdown timer written in bash)
+	qtypist      typing training program)

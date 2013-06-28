@@ -20,16 +20,28 @@ public:
 
     /**
      * @brief proceed to the next word
-     * @param priority the priority of the current (replaced) word
      * @return the next word
      */
-    QString next(int priority);
+    QString next();
 
     /**
-     * @brief get the current word
-     * @return the current word
+     * @brief update priority of the current word
+     * @param priority
+     * @return
      */
-    QString current();
+    void updatePriority(int priority);
+
+    /**
+     * @brief get the current phrase
+     * @return the current phrase
+     */
+    QString currentPhrase();
+
+    /**
+     * @brief get the comment of the current word
+     * @return the comment of the current word
+     */
+    QString currentComment();
 
 signals:
     
@@ -37,14 +49,14 @@ public slots:
 
 private:
     void loadWords(int n);
-    void updatePriority(int priority);
 
     class Entry {
     public:
-        Entry(QString w, int p) : word(w), priority(p), count(0) { }
+        Entry(QString line, int p);
         // sort by reverse priority (higher priority < lower priority)
         bool operator<(const Entry& other) const { return priority > other.priority; }
         QString word;
+        QString comment;
         int priority;
         int count; ///< how many times have the word been used
     };

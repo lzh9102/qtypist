@@ -3,11 +3,23 @@
 #include <limits>
 #include <cstdlib>
 #include <QDebug>
+#include <QRegExp>
 
 #define DEFAULT_SIZE 10
 #define DEFAULT_COUNT 5
 #define INITIAL_PRIORITY std::numeric_limits<int>::max()
 //#define INITIAL_PRIORITY 0
+
+WorkingSet::Entry::Entry(QString line, int p)
+    : priority(p), count(0)
+{
+    // half-width and full-width semicolons
+    QStringList fields = line.split(QRegExp("  |\t"), QString::SkipEmptyParts);
+    if (fields.size() >= 1)
+        word = fields[0].trimmed();
+    if (fields.size() >= 2)
+        comment = fields[1].trimmed();
+}
 
 WorkingSet::WorkingSet(DataSource &source, QObject *parent) :
     QObject(parent), m_source(source), m_size(DEFAULT_SIZE), m_index(-1)
@@ -20,12 +32,10 @@ void WorkingSet::reset()
     m_index = -1;
 }
 
-QString WorkingSet::next(int priority)
+QString WorkingSet::next()
 {
     if (m_list.isEmpty())
         loadWords(m_size);
-    else if (m_index >= 0)
-        updatePriority(priority);
     const int size = m_list.size();
     int index = -1;
     for (int i=0; i<size-1; i++) {
@@ -47,20 +57,13 @@ QString WorkingSet::next(int priority)
             m_list.removeAt(m_index);
             loadWords(m_size - m_list.size());
             m_index = -1;
-            return next(0);
+            updatePriority(0);
+            return next();
         } else {
             ++entry.count;
             return entry.word;
         }
     } else
-        return "";
-}
-
-QString WorkingSet::current()
-{
-    if (m_index >= 0)
-        return m_list.at(m_index).word;
-    else
         return "";
 }
 
@@ -76,6 +79,22 @@ void WorkingSet::updatePriority(int priority)
         dbgmsg += m_list[i].word + " " + QString::number(m_list[i].priority) + "; ";
     }
     qDebug() << dbgmsg;
+}
+
+QString WorkingSet::currentPhrase()
+{
+    if (m_index >= 0)
+        return m_list.at(m_index).word;
+    else
+        return "";
+}
+
+QString WorkingSet::currentComment()
+{
+    if (m_index >= 0)
+        return m_list.at(m_index).comment;
+    else
+        return "";
 }
 
 void WorkingSet::loadWords(int n)
