@@ -290,9 +290,8 @@ void MainWindow::openFileDialog()
     FileDialog dialog(this);
     if (dialog.exec() == QDialog::Accepted) {
         // remove existing phrases and load the new list
-        m_dataSource->clear();
         m_workingSet->reset();
-        if (!m_dataSource->addFile(dialog.selectedFile())) {
+        if (!m_dataSource->loadFile(dialog.selectedFile())) {
             QMessageBox::critical(this, tr("Error")
                                   , tr("Failed to read file."));
         } else { // file opened successfully

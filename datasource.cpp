@@ -13,6 +13,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <cstdlib>
+#include <QRegExp>
 
 DataSource::DataSource(QObject *parent) :
     QObject(parent), m_index(-1)
@@ -23,8 +24,10 @@ DataSource::~DataSource()
 {
 }
 
-bool DataSource::addFile(const QString &filename)
+bool DataSource::loadFile(const QString &filename)
 {
+    clear();
+
     // load file content
     QFile file(filename);
     if (file.open(QIODevice::ReadOnly)) {
@@ -32,8 +35,12 @@ bool DataSource::addFile(const QString &filename)
         while (!instr.atEnd())
         {
             QString line = instr.readLine().trimmed();
-            if (!line.isEmpty())
-                m_list.push_back(line);
+            if (!line.isEmpty()) {
+                if (!line.startsWith("#"))
+                    m_list.push_back(line);
+                else
+                    processDirective(line);
+            }
         }
         return true;
     } else {
@@ -45,6 +52,7 @@ void DataSource::clear()
 {
     m_list.clear();
     m_index = -1;
+    m_lang = "";
 }
 
 bool DataSource::isEmpty() const
@@ -68,4 +76,18 @@ QString DataSource::current()
         return "";
     else
         return m_list[m_index].trimmed();
+}
+
+QString DataSource::language() const
+{
+    return m_lang;
+}
+
+void DataSource::processDirective(QString line)
+{
+    QString directive = line.replace(QRegExp("^#"), "");
+    QRegExp lang_pattern("LANG[ \t]*=[ \t]*([^)]+)");
+    if (lang_pattern.indexIn(line) >= 0) {
+        m_lang = lang_pattern.cap(1);
+    }
 }

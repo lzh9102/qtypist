@@ -23,16 +23,21 @@ public:
     explicit DataSource(QObject *parent = 0);
     ~DataSource();
 
-    bool addFile(const QString& filename);
+    /** Read data from the input file. Existing data will be purged.
+     */
+    bool loadFile(const QString& filename);
     void clear();
     bool isEmpty() const;
 
     QString next();
     QString current();
+    QString language() const;
 
 private:
     QStringList m_list;
+    QString m_lang;
     int m_index;
+    void processDirective(QString line);
 };
 
 #endif // DATASOURCE_H
