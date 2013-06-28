@@ -88,6 +88,6 @@ void DataSource::processDirective(QString line)
     QString directive = line.replace(QRegExp("^#"), "");
     QRegExp lang_pattern("LANG[ \t]*=[ \t]*([^)]+)");
     if (lang_pattern.indexIn(line) >= 0) {
-        m_lang = lang_pattern.cap(1);
+        m_lang = lang_pattern.cap(1).trimmed();
     }
 }
