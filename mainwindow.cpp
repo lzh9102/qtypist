@@ -79,7 +79,7 @@ void MainWindow::slotNext()
     setInputHint(phrase, comment);
     ui->txtInput->clear();
     m_elapsedTimer.restart();
-    m_audio->playPhrase(phrase, m_dataSource->language());
+    slotSpeak();
 }
 
 // Handle Return key in the input box
@@ -92,8 +92,11 @@ void MainWindow::slotHandleInput()
             slotNext();
         } else { // incorrect input
             selectFirstError();
+            slotSpeak();
         }
         updateStatus(correct);
+    } else {
+        slotSpeak();
     }
 }
 
@@ -140,6 +143,11 @@ void MainWindow::slotAbout()
                 + tr("This program is free software; you can redistribute it and/or modify it "
                      "under the terms of the GNU General Public License version 2 or 3.")
                 + "\n\n" + tr("Project Homepage: ") + "http://code.google.com/p/qtypist");
+}
+
+void MainWindow::slotSpeak()
+{
+    m_audio->playPhrase(m_workingSet->currentPhrase(), m_dataSource->language());
 }
 
 void MainWindow::loadAudioUrls()

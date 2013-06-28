@@ -42,6 +42,7 @@ private slots:
     void slotWindowLoaded();
     void slotOpenFile();
     void slotAbout();
+    void slotSpeak();
 
 private:
     Ui::MainWindow *ui;
