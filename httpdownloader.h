@@ -17,11 +17,11 @@ public:
     virtual ~HttpDownloader();
 
 public slots:
-    void startDownload(QString url, QString filename);
+    void startDownload(QString url, QString filename, QString id="");
     void cancelAllDownloads();
 
 signals:
-    void downloadFinished(bool success, QString filename);
+    void downloadFinished(bool success, QString filename, QString id);
 
 private slots:
     void slotDownloadFinished(QNetworkReply *reply);
@@ -31,10 +31,11 @@ private:
     {
     public:
         DownloadParameters() { }
-        DownloadParameters(QString u, QString f)
-            : url(u), filename(f) { }
+        DownloadParameters(QString u, QString f, QString i)
+            : url(u), filename(f), id(i) { }
         QString url;
         QString filename;
+        QString id;
     };
 
     QNetworkAccessManager m_webCtrl;

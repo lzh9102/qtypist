@@ -1,5 +1,6 @@
 #include <QProcess>
 #include "audioplayer.h"
+#include "paths.h"
 
 class AudioPlayer::Private
 {
@@ -28,7 +29,7 @@ void AudioPlayer::playAudioFile(QString filename)
         stopPlayback();
     QStringList params;
     params.append(filename);
-    p->m_proc.start("mplayer", params);
+    p->m_proc.start(Paths::mplayerExecutable(), params);
 }
 
 void AudioPlayer::stopPlayback()

@@ -49,3 +49,17 @@ QString Paths::translationPath()
 {
     return QDir(dataPath()).absoluteFilePath("translations");
 }
+
+QString Paths::audioCachePath()
+{
+    return QDir(QDir::homePath()).absoluteFilePath(".qtypist-audio");
+}
+
+QString Paths::mplayerExecutable()
+{
+#ifndef Q_OS_UNIX
+    return QDir(app_path).absoluteFilePath("mplayer");
+#else
+    return "mplayer";
+#endif
+}

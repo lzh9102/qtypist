@@ -1,0 +1,2 @@
+en https://ssl.gstatic.com/dictionary/static/sounds/de/0/%1.mp3
+en http://translate.google.com/translate_tts?ie=UTF-8&tl=en&q=%1

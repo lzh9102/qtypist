@@ -23,6 +23,7 @@ class HistoryDisplay;
 class ChartDisplay;
 class DataSource;
 class WorkingSet;
+class AudioManager;
 
 class MainWindow : public QMainWindow
 {
@@ -49,9 +50,11 @@ private:
     DataSource *m_dataSource;
     WorkingSet *m_workingSet;
     QElapsedTimer m_elapsedTimer;
+    AudioManager *m_audio;
     double m_maxSpeed;
     int m_totalChars;
     double m_totalTime;
+    void loadAudioUrls();
     void loadSettings();
     void saveSettings();
     void setupEvents();

@@ -15,6 +15,8 @@
 #include <QTimer>
 #include <QElapsedTimer>
 #include <QDebug>
+#include <QFile>
+#include <QTextStream>
 #include <algorithm>
 #include "ui_mainwindow.h"
 #include "historydisplay.h"
@@ -23,6 +25,8 @@
 #include "datasource.h"
 #include "stringmatching.h"
 #include "workingset.h"
+#include "audiomanager.h"
+#include "paths.h"
 
 #define DEFAULT_FONT_SIZE 25
 #define MIN_LINE_COUNT 50
@@ -34,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //m_chart(new ChartDisplay(this)),
     m_dataSource(new DataSource(this)),
     m_workingSet(new WorkingSet(*m_dataSource, this)),
+    m_audio(new AudioManager(this)),
     m_maxSpeed(0),
     m_totalChars(0),
     m_totalTime(0)
@@ -50,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setupToolbar();
     setupEvents();
     loadSettings();
+    loadAudioUrls();
 }
 
 MainWindow::~MainWindow()
@@ -73,6 +79,7 @@ void MainWindow::slotNext()
     setInputHint(phrase, comment);
     ui->txtInput->clear();
     m_elapsedTimer.restart();
+    m_audio->playPhrase(phrase, m_dataSource->language());
 }
 
 // Handle Return key in the input box
@@ -133,6 +140,29 @@ void MainWindow::slotAbout()
                 + tr("This program is free software; you can redistribute it and/or modify it "
                      "under the terms of the GNU General Public License version 2 or 3.")
                 + "\n\n" + tr("Project Homepage: ") + "http://code.google.com/p/qtypist");
+}
+
+void MainWindow::loadAudioUrls()
+{
+    QString filename = Paths::dataFileName("audio-sources.txt");
+    QFile source_list(filename);
+    if (!source_list.open(QIODevice::ReadOnly)) {
+        QMessageBox::critical(this
+                              , tr("error")
+                              , tr("file not found: %1").arg(filename));
+    }
+    QTextStream instr(&source_list);
+    while (!instr.atEnd()) {
+        QString line = instr.readLine();
+        if (line.isEmpty())
+            continue;
+        QStringList fields = line.split(" ", QString::SkipEmptyParts);
+        if (fields.size() == 2) {
+            QString lang = fields[0];
+            QString url = fields[1];
+            m_audio->addUrlPattern(url, lang);
+        }
+    }
 }
 
 void MainWindow::loadSettings()

@@ -15,9 +15,9 @@ HttpDownloader::~HttpDownloader()
     cancelAllDownloads();
 }
 
-void HttpDownloader::startDownload(QString url, QString filename)
+void HttpDownloader::startDownload(QString url, QString filename, QString id)
 {
-    DownloadParameters params(url, filename);
+    DownloadParameters params(url, filename, id);
     QNetworkReply *reply = m_webCtrl.get(QNetworkRequest(url));
     m_downloads[reply] = params;
 }
@@ -40,7 +40,7 @@ void HttpDownloader::slotDownloadFinished(QNetworkReply *reply)
         success = saveToFile(reply, params.filename);
     m_downloads.remove(reply);
     reply->deleteLater();
-    emit downloadFinished(success, params.filename);
+    emit downloadFinished(success, params.filename, params.id);
 }
 
 bool HttpDownloader::saveToFile(QNetworkReply *reply, QString filename)
