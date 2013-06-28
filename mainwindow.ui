@@ -115,7 +115,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -132,6 +132,7 @@
     <addaction name="actionAutoCommit"/>
     <addaction name="actionUnderline"/>
     <addaction name="actionHideParen"/>
+    <addaction name="actionMaskPhrase"/>
    </widget>
    <widget class="QMenu" name="menuTyping">
     <property name="title">
@@ -260,6 +261,14 @@
    </property>
    <property name="statusTip">
     <string>See information about this program</string>
+   </property>
+  </action>
+  <action name="actionMaskPhrase">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string comment="Hide part of the phrase. e.g. hello -&gt; h____">&amp;Mask Phrase</string>
    </property>
   </action>
  </widget>

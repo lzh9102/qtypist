@@ -39,6 +39,7 @@ private slots:
     void slotTextEdited();
     void slotUnderline(bool);
     void slotHideParen(bool);
+    void slotMaskPhrase(bool);
     void slotWindowLoaded();
     void slotOpenFile();
     void slotAbout();
@@ -67,6 +68,7 @@ private:
     void openFileDialog();
     void updateChart(int count, int ms);
     void setInputHint(QString phrase, QString comment);
+    QString maskPhrase(QString phrase);
 };
 
 #endif // MAINWINDOW_H

@@ -124,6 +124,14 @@ void MainWindow::slotHideParen(bool /*checked*/)
     //m_display->setHideParen(checked);
 }
 
+void MainWindow::slotMaskPhrase(bool checked)
+{
+    if (checked) {
+        setInputHint(m_workingSet->currentPhrase(),
+                     m_workingSet->currentComment());
+    }
+}
+
 void MainWindow::slotWindowLoaded()
 {
     openFileDialog();
@@ -195,6 +203,9 @@ void MainWindow::loadSettings()
     ui->actionHideParen->setChecked(hideparen);
     slotHideParen(hideparen);
 
+    const bool maskphrase = settings.value("mask_phrase").toBool();
+    ui->actionMaskPhrase->setChecked(maskphrase);
+
     restoreGeometry(settings.value("window_geometry").toByteArray());
     restoreState(settings.value("window_state").toByteArray());
 }
@@ -207,6 +218,7 @@ void MainWindow::saveSettings()
     settings.setValue("hideparen", ui->actionHideParen->isChecked());
     settings.setValue("window_geometry", saveGeometry());
     settings.setValue("window_state", saveState());
+    settings.setValue("mask_phrase", ui->actionMaskPhrase->isChecked());
 }
 
 void MainWindow::setupEvents()
@@ -227,6 +239,8 @@ void MainWindow::setupEvents()
             , this, SLOT(slotHideParen(bool)));
     connect(ui->actionAbout, SIGNAL(triggered())
             , this, SLOT(slotAbout()));
+    connect(ui->actionMaskPhrase, SIGNAL(triggered(bool))
+            , this, SLOT(slotMaskPhrase(bool)));
 
     // call slotWindowReady() when program enters the event loop
     QTimer::singleShot(0, this, SLOT(slotWindowLoaded()));
@@ -263,7 +277,8 @@ void MainWindow::highlightError()
         }
         markup << tag_begin << expect.at(i) << tag_end;
     }
-    setInputHint(markup.join(""), m_workingSet->currentComment());
+    if (!ui->actionMaskPhrase->isChecked())
+        setInputHint(markup.join(""), m_workingSet->currentComment());
 }
 
 void MainWindow::selectFirstError()
@@ -357,8 +372,22 @@ void MainWindow::updateChart(int count, int ms)
 
 void MainWindow::setInputHint(QString phrase, QString comment)
 {
+    if (ui->actionMaskPhrase->isChecked())
+        phrase = maskPhrase(phrase);
     QString hint = QString("%1").arg(phrase);
     if (!comment.isEmpty())
         hint.append(QString(" (%1)").arg(comment));
     ui->lblInput->setText(hint);
+}
+
+QString MainWindow::maskPhrase(QString phrase)
+{
+    if (!phrase.isEmpty()) {
+        QString s = QString("%1%2")
+                .arg(phrase[0])
+                .arg(QString("_").repeated(phrase.size()-1));
+        return s;
+    } else {
+        return "";
+    }
 }
