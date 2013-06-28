@@ -35,4 +35,5 @@ void AudioPlayer::playAudioFile(QString filename)
 void AudioPlayer::stopPlayback()
 {
     p->m_proc.kill();
+    p->m_proc.waitForFinished();
 }
