@@ -40,6 +40,7 @@ private slots:
     void slotUnderline(bool);
     void slotHideParen(bool);
     void slotMaskPhrase(bool);
+    void slotHidePhrase(bool);
     void slotWindowLoaded();
     void slotOpenFile();
     void slotAbout();

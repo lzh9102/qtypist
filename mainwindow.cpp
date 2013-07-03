@@ -132,6 +132,13 @@ void MainWindow::slotMaskPhrase(bool checked)
     }
 }
 
+void MainWindow::slotHidePhrase(bool checked)
+{
+    if (checked) {
+        setInputHint("", m_workingSet->currentComment());
+    }
+}
+
 void MainWindow::slotWindowLoaded()
 {
     openFileDialog();
@@ -241,6 +248,8 @@ void MainWindow::setupEvents()
             , this, SLOT(slotAbout()));
     connect(ui->actionMaskPhrase, SIGNAL(triggered(bool))
             , this, SLOT(slotMaskPhrase(bool)));
+    connect(ui->actionCommentOnly, SIGNAL(triggered(bool))
+            , this, SLOT(slotHidePhrase(bool)));
 
     // call slotWindowReady() when program enters the event loop
     QTimer::singleShot(0, this, SLOT(slotWindowLoaded()));
@@ -374,6 +383,8 @@ void MainWindow::setInputHint(QString phrase, QString comment)
 {
     if (ui->actionMaskPhrase->isChecked())
         phrase = maskPhrase(phrase);
+    if (ui->actionCommentOnly->isChecked())
+        phrase = "";
     QString hint = QString("%1").arg(phrase);
     if (!comment.isEmpty())
         hint.append(QString(" (%1)").arg(comment));

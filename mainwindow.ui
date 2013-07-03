@@ -133,6 +133,7 @@
     <addaction name="actionUnderline"/>
     <addaction name="actionHideParen"/>
     <addaction name="actionMaskPhrase"/>
+    <addaction name="actionCommentOnly"/>
    </widget>
    <widget class="QMenu" name="menuTyping">
     <property name="title">
@@ -269,6 +270,14 @@
    </property>
    <property name="text">
     <string comment="Hide part of the phrase. e.g. hello -&gt; h____">&amp;Mask Phrase</string>
+   </property>
+  </action>
+  <action name="actionCommentOnly">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string extracomment="Do not show the phrase; show the corresponding comment only.">Show &amp;Comment Only</string>
    </property>
   </action>
  </widget>
