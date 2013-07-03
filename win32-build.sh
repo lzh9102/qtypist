@@ -11,8 +11,9 @@ lrelease qtypist.pro
 rm -r qtypist
 mkdir qtypist
 
-# copy dynamic libraries and translations
+# copy programs and translations
 cp *.dll release/qtypist.exe audio-sources.txt qtypist
+cp *.exe qtypist
 mkdir qtypist/translations/
 cp translations/*.qm qtypist/translations/
 

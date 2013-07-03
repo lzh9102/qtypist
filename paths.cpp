@@ -58,7 +58,7 @@ QString Paths::audioCachePath()
 QString Paths::mplayerExecutable()
 {
 #ifndef Q_OS_UNIX
-    return QDir(app_path).absoluteFilePath("mplayer");
+    return QDir(app_path).absoluteFilePath("mplayer.exe");
 #else
     return "mplayer";
 #endif
