@@ -1,4 +1,4 @@
-﻿!include "MUI.nsh"
+!include "MUI.nsh"
 !define APPNAME "qtypist"
 !define VERSION "0.1.0"
 !define DESCRIPTION "練習打字的小程式"
@@ -56,7 +56,7 @@ Section
 	File translations\*.qm
 	
 	SetOutPath $INSTDIR\lists
-	File lists\*.txt
+	File lists\*.txt lists\README.text
 
 	# Create Uninstaller
 	WriteUninstaller "$INSTDIR\${UNINSTALLER}"
@@ -69,6 +69,7 @@ Section
 	CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
 	CreateShortcut "$SMPROGRAMS\$StartMenuFolder\qtypist.lnk" "$INSTDIR\qtypist.exe"
 	CreateShortcut "$SMPROGRAMS\$StartMenuFolder\Uninstall qtypist.lnk" "$INSTDIR\${UNINSTALLER}"
+	CreateShortcut "$SMPROGRAMS\$StartMenuFolder\lists.lnk" "$INSTDIR\lists\"
 	!insertmacro MUI_STARTMENU_WRITE_END
 
 SectionEnd

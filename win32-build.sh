@@ -31,5 +31,7 @@ for f in lists/*.txt; do
 	iconv -c -f UTF-8 -t BIG-5 $f > $TARGET
 	unix2dos $TARGET
 done
+cp lists/README qtypist/lists/README.text
+unix2dos qtypist/lists/README.text
 
 read -p "files have been copied to \"qtypist/\". press any key to continue..."
