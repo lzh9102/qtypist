@@ -34,6 +34,7 @@ public:
 
 private slots:
     void slotAccepted();
+    void slotOpenListDir();
 
 private:
     Ui::FileDialog *ui;

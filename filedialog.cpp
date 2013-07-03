@@ -13,6 +13,8 @@
 #include <QStringList>
 #include <QSettings>
 #include <QDebug>
+#include <QDesktopServices>
+#include <QUrl>
 #include "filedialog.h"
 #include "ui_filedialog.h"
 #include "paths.h"
@@ -49,6 +51,8 @@ FileDialog::FileDialog(QWidget *parent) :
     connect(this, SIGNAL(accepted()), this, SLOT(slotAccepted()));
     connect(ui->listFiles, SIGNAL(doubleClicked(QModelIndex))
             , this, SLOT(accept()));
+    connect(ui->btnOpenListDir, SIGNAL(clicked())
+            , this, SLOT(slotOpenListDir()));
 }
 
 FileDialog::~FileDialog()
@@ -74,4 +78,10 @@ void FileDialog::slotAccepted()
     QSettings settings;
     if (!ui->listFiles->selectedItems().isEmpty())
         settings.setValue("file_prev", ui->listFiles->selectedItems().at(0)->text());
+}
+
+void FileDialog::slotOpenListDir()
+{
+    QString dir_path = Paths::dataFileName("lists");
+    QDesktopServices::openUrl(QUrl::fromLocalFile(dir_path));
 }

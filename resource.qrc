@@ -9,5 +9,6 @@
         <file>images/appicon.png</file>
         <file>images/mute.png</file>
         <file>images/chart.png</file>
+        <file>images/open-folder.png</file>
     </qresource>
 </RCC>
