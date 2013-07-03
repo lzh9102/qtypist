@@ -212,6 +212,7 @@ void MainWindow::loadSettings()
     LOAD_ACTION(HideParen, "hideparen");
     LOAD_ACTION(MaskPhrase, "mask_phrase");
     LOAD_ACTION(Mute, "mute");
+    LOAD_ACTION(CommentOnly, "hide_phrase");
 
     restoreGeometry(settings.value("window_geometry").toByteArray());
     restoreState(settings.value("window_state").toByteArray());
@@ -226,6 +227,7 @@ void MainWindow::saveSettings()
     SAVE_ACTION(HideParen, "hideparen");
     SAVE_ACTION(Mute, "mute");
     SAVE_ACTION(MaskPhrase, "mask_phrase");
+    SAVE_ACTION(CommentOnly, "hide_phrase");
     settings.setValue("window_geometry", saveGeometry());
     settings.setValue("window_state", saveState());
 }
