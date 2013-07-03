@@ -16,6 +16,11 @@
         <source>Select File</source>
         <translation>選擇檔案</translation>
     </message>
+    <message>
+        <location filename="../filedialog.ui" line="38"/>
+        <source>Open &amp;List Folder</source>
+        <translation>開啟詞庫資料夾(&amp;L)</translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
