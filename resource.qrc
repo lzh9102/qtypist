@@ -7,5 +7,6 @@
         <file>images/autocommit.png</file>
         <file>images/skip.png</file>
         <file>images/appicon.png</file>
+        <file>images/mute.png</file>
     </qresource>
 </RCC>

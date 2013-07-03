@@ -162,7 +162,10 @@ void MainWindow::slotAbout()
 
 void MainWindow::slotSpeak()
 {
-    m_audio->playPhrase(m_workingSet->currentPhrase(), m_dataSource->language());
+    if (!ui->actionMute->isChecked())
+        m_audio->playPhrase(m_workingSet->currentPhrase(), m_dataSource->language());
+    else // download but not play
+        m_audio->downloadPhrase(m_workingSet->currentPhrase(), m_dataSource->language());
 }
 
 void MainWindow::loadAudioUrls()
@@ -191,6 +194,7 @@ void MainWindow::loadAudioUrls()
 void MainWindow::loadSettings()
 {
     QSettings settings;
+#define LOAD_ACTION(action, name) ui->action->setChecked(settings.value(name).toBool())
 
     const int font_size = settings.value("fontsize", DEFAULT_FONT_SIZE).toInt();
     QFont font = ui->txtInput->font();
@@ -213,12 +217,15 @@ void MainWindow::loadSettings()
     const bool maskphrase = settings.value("mask_phrase").toBool();
     ui->actionMaskPhrase->setChecked(maskphrase);
 
+    LOAD_ACTION(actionMute, "mute");
+
     restoreGeometry(settings.value("window_geometry").toByteArray());
     restoreState(settings.value("window_state").toByteArray());
 }
 
 void MainWindow::saveSettings()
 {
+#define SAVE_ACTION(action, name) settings.setValue(name, ui->action->isChecked());
     QSettings settings;
     settings.setValue("underline", ui->actionUnderline->isChecked());
     settings.setValue("autocommit", ui->actionAutoCommit->isChecked());
@@ -226,6 +233,7 @@ void MainWindow::saveSettings()
     settings.setValue("window_geometry", saveGeometry());
     settings.setValue("window_state", saveState());
     settings.setValue("mask_phrase", ui->actionMaskPhrase->isChecked());
+    SAVE_ACTION(actionMute, "mute");
 }
 
 void MainWindow::setupEvents()
