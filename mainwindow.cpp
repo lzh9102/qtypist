@@ -194,7 +194,7 @@ void MainWindow::loadAudioUrls()
 void MainWindow::loadSettings()
 {
     QSettings settings;
-#define LOAD_ACTION(action, name) ui->action->setChecked(settings.value(name).toBool())
+#define LOAD_ACTION(aname, name) ui->action ## aname ->setChecked(settings.value(name).toBool())
 
     const int font_size = settings.value("fontsize", DEFAULT_FONT_SIZE).toInt();
     QFont font = ui->txtInput->font();
@@ -205,19 +205,13 @@ void MainWindow::loadSettings()
     m_display->setFontSize(font_size);
 
     const bool underline = settings.value("underline", true).toBool();
-    ui->actionUnderline->setChecked(underline);
     slotUnderline(underline); // guarantee that m_display is updated
 
-    ui->actionAutoCommit->setChecked(settings.value("autocommit", true).toBool());
-
-    const bool hideparen = settings.value("hideparen", false).toBool();
-    ui->actionHideParen->setChecked(hideparen);
-    slotHideParen(hideparen);
-
-    const bool maskphrase = settings.value("mask_phrase").toBool();
-    ui->actionMaskPhrase->setChecked(maskphrase);
-
-    LOAD_ACTION(actionMute, "mute");
+    LOAD_ACTION(Underline, "underline");
+    LOAD_ACTION(AutoCommit, "autocommit");
+    LOAD_ACTION(HideParen, "hideparen");
+    LOAD_ACTION(MaskPhrase, "mask_phrase");
+    LOAD_ACTION(Mute, "mute");
 
     restoreGeometry(settings.value("window_geometry").toByteArray());
     restoreState(settings.value("window_state").toByteArray());
@@ -225,15 +219,15 @@ void MainWindow::loadSettings()
 
 void MainWindow::saveSettings()
 {
-#define SAVE_ACTION(action, name) settings.setValue(name, ui->action->isChecked());
+#define SAVE_ACTION(aname, name) settings.setValue(name, ui->action ## aname->isChecked());
     QSettings settings;
-    settings.setValue("underline", ui->actionUnderline->isChecked());
-    settings.setValue("autocommit", ui->actionAutoCommit->isChecked());
-    settings.setValue("hideparen", ui->actionHideParen->isChecked());
+    SAVE_ACTION(Underline, "underline");
+    SAVE_ACTION(AutoCommit, "autocommit");
+    SAVE_ACTION(HideParen, "hideparen");
+    SAVE_ACTION(Mute, "mute");
+    SAVE_ACTION(MaskPhrase, "mask_phrase");
     settings.setValue("window_geometry", saveGeometry());
     settings.setValue("window_state", saveState());
-    settings.setValue("mask_phrase", ui->actionMaskPhrase->isChecked());
-    SAVE_ACTION(actionMute, "mute");
 }
 
 void MainWindow::setupEvents()
