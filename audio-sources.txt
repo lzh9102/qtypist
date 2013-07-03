@@ -1,3 +1,4 @@
 en https://ssl.gstatic.com/dictionary/static/sounds/de/0/%1.mp3
 en http://translate.google.com/translate_tts?ie=UTF-8&tl=en&q=%1
 zh_TW http://translate.google.com/translate_tts?ie=UTF-8&tl=zh_TW&q=%1
+ko http://translate.google.com/translate_tts?ie=UTF-8&tl=ko&q=%1

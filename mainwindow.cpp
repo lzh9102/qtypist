@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     m_display(new HistoryDisplay(this)),
-    //m_chart(new ChartDisplay(this)),
+    m_chart(new ChartDisplay(this)),
     m_dataSource(new DataSource(this)),
     m_workingSet(new WorkingSet(*m_dataSource, this)),
     m_audio(new AudioManager(this)),
@@ -45,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->displayLayout->addWidget(m_display);
-    //ui->chartLayout->addWidget(m_chart);
+    ui->chartLayout->addWidget(m_chart);
     ui->chartLayout->setSizeConstraint(QLayout::SetMaximumSize);
     ui->lblAvgSpeed->setText("");
     ui->lblMaxSpeed->setText("");
@@ -71,6 +71,7 @@ void MainWindow::slotNext()
     int average_time = m_elapsedTimer.elapsed();
     if (!s.isEmpty())
         average_time /= s.size();
+    updateChart(/* 1 character */ 1, /* milliseconds */ average_time);
     m_display->push(s);
     m_workingSet->updatePriority(average_time);
     m_workingSet->next();
