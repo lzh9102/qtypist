@@ -262,6 +262,7 @@ void MainWindow::setupToolbar()
     ui->toolBar->addAction(ui->actionOpen);
     ui->toolBar->addAction(ui->actionSkip);
     ui->toolBar->addAction(ui->actionAutoCommit);
+    ui->toolBar->addAction(ui->actionMute);
 }
 
 // highlight mistyped characters
