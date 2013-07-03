@@ -135,6 +135,7 @@
     <addaction name="actionMaskPhrase"/>
     <addaction name="actionCommentOnly"/>
     <addaction name="actionMute"/>
+    <addaction name="actionShowSpeedChart"/>
    </widget>
    <widget class="QMenu" name="menuTyping">
     <property name="title">
@@ -291,6 +292,17 @@
    </property>
    <property name="text">
     <string>Mute</string>
+   </property>
+  </action>
+  <action name="actionShowSpeedChart">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Show &amp;Speed Chart</string>
    </property>
   </action>
  </widget>

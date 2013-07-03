@@ -41,6 +41,7 @@ private slots:
     void slotHideParen(bool);
     void slotMaskPhrase(bool);
     void slotHidePhrase(bool);
+    void slotShowSpeedChart(bool);
     void slotWindowLoaded();
     void slotOpenFile();
     void slotAbout();

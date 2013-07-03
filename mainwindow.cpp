@@ -140,6 +140,11 @@ void MainWindow::slotHidePhrase(bool checked)
     }
 }
 
+void MainWindow::slotShowSpeedChart(bool checked)
+{
+    m_chart->setVisible(checked);
+}
+
 void MainWindow::slotWindowLoaded()
 {
     openFileDialog();
@@ -195,7 +200,8 @@ void MainWindow::loadAudioUrls()
 void MainWindow::loadSettings()
 {
     QSettings settings;
-#define LOAD_ACTION(aname, name) ui->action ## aname ->setChecked(settings.value(name).toBool())
+#define LOAD_ACTION(aname, name, default_value) ui->action ## aname \
+                    ->setChecked(settings.value(name, default_value).toBool())
 
     const int font_size = settings.value("fontsize", DEFAULT_FONT_SIZE).toInt();
     QFont font = ui->txtInput->font();
@@ -208,12 +214,15 @@ void MainWindow::loadSettings()
     const bool underline = settings.value("underline", true).toBool();
     slotUnderline(underline); // guarantee that m_display is updated
 
-    LOAD_ACTION(Underline, "underline");
-    LOAD_ACTION(AutoCommit, "autocommit");
-    LOAD_ACTION(HideParen, "hideparen");
-    LOAD_ACTION(MaskPhrase, "mask_phrase");
-    LOAD_ACTION(Mute, "mute");
-    LOAD_ACTION(CommentOnly, "hide_phrase");
+    LOAD_ACTION(Underline, "underline", false);
+    LOAD_ACTION(AutoCommit, "autocommit", false);
+    LOAD_ACTION(HideParen, "hideparen", false);
+    LOAD_ACTION(MaskPhrase, "mask_phrase", false);
+    LOAD_ACTION(Mute, "mute", false);
+    LOAD_ACTION(CommentOnly, "hide_phrase", false);
+    LOAD_ACTION(ShowSpeedChart, "show_speed_chart", true);
+
+    slotShowSpeedChart(ui->actionShowSpeedChart->isChecked());
 
     restoreGeometry(settings.value("window_geometry").toByteArray());
     restoreState(settings.value("window_state").toByteArray());
@@ -229,6 +238,7 @@ void MainWindow::saveSettings()
     SAVE_ACTION(Mute, "mute");
     SAVE_ACTION(MaskPhrase, "mask_phrase");
     SAVE_ACTION(CommentOnly, "hide_phrase");
+    SAVE_ACTION(ShowSpeedChart, "show_speed_chart");
     settings.setValue("window_geometry", saveGeometry());
     settings.setValue("window_state", saveState());
 }
@@ -255,6 +265,8 @@ void MainWindow::setupEvents()
             , this, SLOT(slotMaskPhrase(bool)));
     connect(ui->actionCommentOnly, SIGNAL(triggered(bool))
             , this, SLOT(slotHidePhrase(bool)));
+    connect(ui->actionShowSpeedChart, SIGNAL(triggered(bool))
+            , this, SLOT(slotShowSpeedChart(bool)));
 
     // call slotWindowReady() when program enters the event loop
     QTimer::singleShot(0, this, SLOT(slotWindowLoaded()));
