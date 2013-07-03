@@ -93,6 +93,8 @@ Section "un.Uninstaller"
 	RmDir  $INSTDIR\lists
 	Delete $INSTDIR\translations\*
 	RmDir  $INSTDIR\translations
+	Delete $INSTDIR\mplayer\*
+	RmDir  $INSTDIR\mplayer
 	RmDir  $INSTDIR    # Remove the installation directory if it's empty.
 
 	Delete "$DESKTOP\qtypist.lnk"
