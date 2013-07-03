@@ -51,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lblMaxSpeed->setText("");
     ui->lblInput->setText("");
     ui->actionHideParen->setVisible(false);
+    m_elapsedTimer.invalidate();
 
     setupToolbar();
     setupEvents();
@@ -68,12 +69,14 @@ MainWindow::~MainWindow()
 void MainWindow::slotNext()
 {
     const QString s = m_workingSet->currentPhrase();
-    int average_time = m_elapsedTimer.elapsed();
-    if (!s.isEmpty())
-        average_time /= s.size();
-    updateChart(/* 1 character */ 1, /* milliseconds */ average_time);
+    if (m_elapsedTimer.isValid()) {
+        int average_time = m_elapsedTimer.elapsed();
+        updateChart(/* characters */ s.size(), /* milliseconds */ average_time);
+        if (!s.isEmpty())
+            average_time /= s.size();
+        m_workingSet->updatePriority(average_time);
+    }
     m_display->push(s);
-    m_workingSet->updatePriority(average_time);
     m_workingSet->next();
     QString phrase = m_workingSet->currentPhrase();
     QString comment = m_workingSet->currentComment();
