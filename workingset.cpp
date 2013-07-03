@@ -16,7 +16,7 @@
 #include <QDebug>
 #include <QRegExp>
 
-#define DEFAULT_SIZE 10
+#define DEFAULT_SIZE 20
 #define DEFAULT_COUNT 5
 #define INITIAL_PRIORITY std::numeric_limits<int>::max()
 //#define INITIAL_PRIORITY 0
@@ -50,7 +50,7 @@ QString WorkingSet::next()
     const int size = m_list.size();
     int index = -1;
     for (int i=0; i<size-1; i++) {
-        if (rand() % 2 == 0) { // 1/2 chance to choose the item with higher priority
+        if (rand() % 3 == 0) { // 1/3 chance to choose the item with higher priority
             index = i;
             break;
         }
