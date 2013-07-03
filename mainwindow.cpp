@@ -278,6 +278,7 @@ void MainWindow::setupToolbar()
     ui->toolBar->addAction(ui->actionSkip);
     ui->toolBar->addAction(ui->actionAutoCommit);
     ui->toolBar->addAction(ui->actionMute);
+    ui->toolBar->addAction(ui->actionShowSpeedChart);
 }
 
 // highlight mistyped characters

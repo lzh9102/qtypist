@@ -301,6 +301,10 @@
    <property name="checked">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/images/chart.png</normaloff>:/icon/images/chart.png</iconset>
+   </property>
    <property name="text">
     <string>Show &amp;Speed Chart</string>
    </property>
