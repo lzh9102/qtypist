@@ -36,6 +36,11 @@ int main(int argc, char *argv[])
     translator.load(translation_basename + locale);
     app.installTranslator(&translator);
 
+    // Load translation for Qt library
+    QTranslator translator_qt;
+    translator_qt.load("qt_" + QLocale::system().name(), Paths::qtTranslationPath());
+    app.installTranslator(&translator_qt);
+
     srand(time(0));
 
     MainWindow w;
