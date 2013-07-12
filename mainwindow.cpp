@@ -173,8 +173,7 @@ void MainWindow::slotSpeak()
 {
     if (!ui->actionMute->isChecked())
         m_audio->playPhrase(m_workingSet->currentPhrase(), m_dataSource->language());
-    else // download but not play
-        m_audio->downloadPhrase(m_workingSet->currentPhrase(), m_dataSource->language());
+    // do nothing if the mute option is enabled
 }
 
 void MainWindow::loadAudioUrls()
@@ -222,7 +221,7 @@ void MainWindow::loadSettings()
     LOAD_ACTION(AutoCommit, "autocommit", false);
     LOAD_ACTION(HideParen, "hideparen", false);
     LOAD_ACTION(MaskPhrase, "mask_phrase", false);
-    LOAD_ACTION(Mute, "mute", false);
+    LOAD_ACTION(Mute, "mute", true);
     LOAD_ACTION(CommentOnly, "hide_phrase", false);
     LOAD_ACTION(ShowSpeedChart, "show_speed_chart", true);
 
