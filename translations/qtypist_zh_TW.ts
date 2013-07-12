@@ -26,7 +26,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="20"/>
-        <location filename="../mainwindow.cpp" line="385"/>
+        <location filename="../mainwindow.cpp" line="397"/>
         <source>Typing Drill</source>
         <translation>打字練習</translation>
     </message>
@@ -164,17 +164,17 @@
         <translation>顯示打字速度圖表</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="165"/>
+        <location filename="../mainwindow.cpp" line="166"/>
         <source>About this program</source>
         <translation>關於此程式</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="167"/>
+        <location filename="../mainwindow.cpp" line="168"/>
         <source>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 or 3.</source>
         <translation>這個程式是自由軟體，你可以在GNU授權條款(第二或第三版)下修改及散佈此軟體。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="169"/>
+        <location filename="../mainwindow.cpp" line="170"/>
         <source>Project Homepage: </source>
         <translation>專案首頁: </translation>
     </message>
@@ -189,22 +189,32 @@
         <translation>找不到檔案: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="237"/>
+        <source>Disable Audio</source>
+        <translation>關閉音效</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="238"/>
+        <source>Cannot play audio files. Audio playing will be disabled</source>
+        <translation>無法播放音效檔案，將關閉音效播放功能。</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="391"/>
         <source>Error</source>
         <translation>錯誤</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="380"/>
+        <location filename="../mainwindow.cpp" line="392"/>
         <source>Failed to read file.</source>
         <translation>無法開啟檔案</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="400"/>
+        <location filename="../mainwindow.cpp" line="412"/>
         <source>Max Speed: %1</source>
         <translation>最高速度: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="401"/>
+        <location filename="../mainwindow.cpp" line="413"/>
         <source>Average Speed: %1</source>
         <translation>平均速度: %1</translation>
     </message>
