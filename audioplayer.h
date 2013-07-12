@@ -22,6 +22,8 @@ public:
     explicit AudioPlayer(QObject *parent = 0);
     ~AudioPlayer();
 
+    static bool isAvailable();
+
     bool isPlaying() const;
 
 public slots:

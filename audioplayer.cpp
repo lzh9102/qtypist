@@ -10,6 +10,7 @@
  */
 
 #include <QProcess>
+#include <QFile>
 #include "audioplayer.h"
 #include "paths.h"
 
@@ -27,6 +28,17 @@ AudioPlayer::AudioPlayer(QObject *parent) :
 AudioPlayer::~AudioPlayer()
 {
     stopPlayback();
+}
+
+bool AudioPlayer::isAvailable()
+{
+    // try to run mplayer to see if it exists
+    QProcess mplayer_proc;
+    mplayer_proc.start(Paths::mplayerExecutable());
+    if (!mplayer_proc.waitForStarted())
+        return false;
+    mplayer_proc.waitForFinished();
+    return true;
 }
 
 bool AudioPlayer::isPlaying() const

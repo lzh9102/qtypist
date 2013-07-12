@@ -26,6 +26,7 @@
 #include "stringmatching.h"
 #include "workingset.h"
 #include "audiomanager.h"
+#include "audioplayer.h"
 #include "paths.h"
 
 #define DEFAULT_FONT_SIZE 25
@@ -55,8 +56,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setupToolbar();
     setupEvents();
-    loadSettings();
-    loadAudioUrls();
 }
 
 MainWindow::~MainWindow()
@@ -150,6 +149,8 @@ void MainWindow::slotShowSpeedChart(bool checked)
 
 void MainWindow::slotWindowLoaded()
 {
+    loadSettings();
+    loadAudioUrls();
     openFileDialog();
 }
 
@@ -229,6 +230,17 @@ void MainWindow::loadSettings()
 
     restoreGeometry(settings.value("window_geometry").toByteArray());
     restoreState(settings.value("window_state").toByteArray());
+
+    if (!AudioPlayer::isAvailable()) {
+        // disable audio playback if the audio playing service is not available
+        if (!ui->actionMute->isChecked()) {
+            QMessageBox::information(this, tr("Disable Audio")
+                                     , tr("Cannot play audio files. "
+                                          "Audio playing will be disabled"));
+        }
+        ui->actionMute->setChecked(true);
+        ui->actionMute->setEnabled(false);
+    }
 }
 
 void MainWindow::saveSettings()
