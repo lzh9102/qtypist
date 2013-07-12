@@ -1,23 +1,31 @@
 # run this file with cygwin32
 
+DEST=qtypist
+DEFINES=
+if [ "$QTYPIST_PORTABLE_APP" == "1" ]; then
+	echo "CONFIG: PORTABLE APP"
+	DEFINES="DEFINES+=PORTABLE_APP"
+	DEST=qtypist-portable
+fi
+
 # rebuild the program
 make clean
-qmake
+qmake $DEFINES
 make release
 lrelease qtypist.pro
 
 # create target directory
-rm -rf qtypist
-mkdir qtypist
+rm -rf $DEST
+mkdir $DEST
 
 # copy programs and related files
-cp *.dll release/qtypist.exe audio-sources.txt qtypist
-cp *.exe qtypist
-cp license.txt changelog.txt qtypist
-unix2dos qtypist/license.txt qtypist/changelog.txt
-cp qtypist.nsi qtypist
-mkdir qtypist/translations/
-cp translations/*.qm qtypist/translations/
+cp *.dll release/qtypist.exe audio-sources.txt $DEST
+cp *.exe $DEST
+cp license.txt changelog.txt $DEST
+unix2dos $DEST/license.txt $DEST/changelog.txt
+[ "$QTYPIST_PORTABLE_APP" != "1" ] && cp qtypist.nsi $DEST
+mkdir $DEST/translations/
+cp translations/*.qm $DEST/translations/
 
 # extract lists
 for f in lists/*.7z; do
@@ -25,13 +33,13 @@ for f in lists/*.7z; do
 done
 
 # copy lists
-mkdir qtypist/lists/
+mkdir $DEST/lists/
 for f in lists/*.txt; do
-	TARGET=qtypist/lists/`basename $f`
+	TARGET=$DEST/lists/`basename $f`
 	iconv -c -f UTF-8 -t BIG-5 $f > $TARGET
 	unix2dos $TARGET
 done
-cp lists/README qtypist/lists/README.text
-unix2dos qtypist/lists/README.text
+cp lists/README $DEST/lists/README.text
+unix2dos $DEST/lists/README.text
 
-read -p "files have been copied to \"qtypist/\". press any key to continue..."
+read -p "files have been copied to \"$DEST/\". press any key to continue..."

@@ -62,7 +62,11 @@ QString Paths::qtTranslationPath()
 
 QString Paths::audioCachePath()
 {
+#ifndef PORTABLE_APP
     return QDir(QDir::homePath()).absoluteFilePath(".qtypist-audio");
+#else
+    return QDir(app_path).absoluteFilePath("audio-cache");
+#endif
 }
 
 QString Paths::mplayerExecutable()

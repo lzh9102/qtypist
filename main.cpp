@@ -14,6 +14,7 @@
 #include <QLocale>
 #include <QDir>
 #include <QDebug>
+#include <QSettings>
 #include <cstdlib>
 #include <ctime>
 #include "mainwindow.h"
@@ -23,7 +24,14 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
+    // Register QSettings information.
     app.setOrganizationName("qtypist");
+#ifdef PORTABLE_APP // Portable App: Save settings in <exepath>/qtypist.ini.
+    QSettings::setDefaultFormat(QSettings::IniFormat);
+    QSettings::setPath(QSettings::IniFormat, QSettings::UserScope
+                       , app.applicationDirPath());
+    qDebug() << "Setting path: " + app.applicationDirPath();
+#endif
 
     Paths::setAppPath(app.applicationDirPath());
 
