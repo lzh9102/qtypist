@@ -185,6 +185,7 @@ void MainWindow::loadAudioUrls()
         QMessageBox::critical(this
                               , tr("error")
                               , tr("file not found: %1").arg(filename));
+        return;
     }
     QTextStream instr(&source_list);
     while (!instr.atEnd()) {
