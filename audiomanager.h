@@ -1,6 +1,6 @@
 /* qtypist - a typing training program
  *
- * Copyright (C) 2012 Timothy Lin <lzh9102@gmail.com>
+ * Copyright (C) 2012-2015 Che-Huai Lin <lzh9102@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

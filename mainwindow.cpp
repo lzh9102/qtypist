@@ -1,6 +1,6 @@
 /* qtypist - a typing training program
  *
- * Copyright (C) 2012 Timothy Lin <lzh9102@gmail.com>
+ * Copyright (C) 2012-2015 Che-Huai Lin <lzh9102@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -164,7 +164,7 @@ void MainWindow::slotAbout()
     QMessageBox::information(
                 this,
                 tr("About this program"),
-                "qtypist (C) 2012 Timothy Lin\n\n"
+                "qtypist (C) 2012-2015 Che-Huai Lin\n\n"
                 + tr("This program is free software; you can redistribute it and/or modify it "
                      "under the terms of the GNU General Public License version 2 or 3.")
                 + "\n\n" + tr("Project Homepage: ") + "https://github.com/lzh9102/qtypist");
