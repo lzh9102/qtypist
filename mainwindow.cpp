@@ -6,7 +6,7 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 or 3 of the License.
  *
- * project page: http://code.google.com/p/qtypist
+ * project page: https://github.com/lzh9102/qtypist
  */
 
 #include "mainwindow.h"
@@ -167,7 +167,7 @@ void MainWindow::slotAbout()
                 "qtypist (C) 2012 Timothy Lin\n\n"
                 + tr("This program is free software; you can redistribute it and/or modify it "
                      "under the terms of the GNU General Public License version 2 or 3.")
-                + "\n\n" + tr("Project Homepage: ") + "http://code.google.com/p/qtypist");
+                + "\n\n" + tr("Project Homepage: ") + "https://github.com/lzh9102/qtypist");
 }
 
 void MainWindow::slotSpeak()

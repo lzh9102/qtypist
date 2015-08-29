@@ -6,7 +6,7 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 or 3 of the License.
  *
- * project page: http://code.google.com/p/qtypist
+ * project page: https://github.com/lzh9102/qtypist
  */
 
 #include <QDir>
