@@ -61,7 +61,7 @@ bool HttpDownloader::saveToFile(QNetworkReply *reply, QString filename)
         return false;
     char buffer[BUFFER_SIZE];
     int nread;
-    while ((nread = reply->read(buffer, BUFFER_SIZE)) >= 0) {
+    while ((nread = reply->read(buffer, BUFFER_SIZE)) > 0) {
         localFile.write(buffer, nread);
     }
     return true;
