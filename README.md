@@ -4,8 +4,9 @@
 
 ### Acknowledgement
 
-The word list for Traditional Chinese is taken from the
+- The phrase list for Traditional Chinese is taken from the
 [libchewing](https://github.com/chewing/libchewing) project.
+- This program downloads pronunciation of words from Google Translate.
 
 ### License
 
